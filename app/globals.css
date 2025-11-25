@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-70: var(--foreground-70);
+  --color-foreground-50: var(--foreground-50);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-syne);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.5rem;
+  
+  /* Charte graphique - Couleurs principales */
+  --background: #050816;
+  --surface: #152238;
+  --accent: #ffd966;
+  --accent-glow: rgba(255, 217, 102, 0.3);
+  --foreground: #ffffff;
+  --foreground-70: rgba(255, 255, 255, 0.7);
+  --foreground-50: rgba(255, 255, 255, 0.5);
+  --border: rgba(255, 255, 255, 0.1);
+  
+  /* Couleurs système */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --primary: var(--accent);
+  --primary-foreground: #0a1628;
+  --secondary: var(--surface);
+  --secondary-foreground: var(--foreground);
+  --muted: rgba(255, 255, 255, 0.05);
+  --muted-foreground: var(--foreground-70);
+  --destructive: #ef4444;
+  --ring: var(--accent);
+  --input: var(--border);
+}
+
+.dark {
+  /* Mode sombre utilise les mêmes couleurs par défaut */
+  --background: #050816;
+  --surface: #152238;
+  --accent: #ffd966;
+  --accent-glow: rgba(255, 217, 102, 0.3);
+  --foreground: #ffffff;
+  --foreground-70: rgba(255, 255, 255, 0.7);
+  --foreground-50: rgba(255, 255, 255, 0.5);
+  --border: rgba(255, 255, 255, 0.1);
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --primary: var(--accent);
+  --primary-foreground: #0a1628;
+  --secondary: var(--surface);
+  --secondary-foreground: var(--foreground);
+  --muted: rgba(255, 255, 255, 0.05);
+  --muted-foreground: var(--foreground-70);
+  --destructive: #ef4444;
+  --ring: var(--accent);
+  --input: var(--border);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+  
+  /* Glassmorphism utilities */
+  .glass {
+    background: rgba(21, 34, 56, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-subtle {
+    background: rgba(21, 34, 56, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  /* Accent glow effect */
+  .accent-glow {
+    box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+  }
+  
+  .accent-glow-sm {
+    box-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+  }
+  
+  /* Smooth transitions */
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  
+  /* Elegant hover effects */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Discreet gradients */
+  .gradient-subtle {
+    background: linear-gradient(135deg, rgba(10, 22, 40, 0.8) 0%, rgba(21, 34, 56, 0.8) 100%);
+  }
+  
+  .gradient-accent {
+    background: linear-gradient(135deg, rgba(255, 217, 102, 0.1) 0%, rgba(255, 217, 102, 0.05) 100%);
+  }
+  
+  /* Text opacity utilities */
+  .text-foreground-70 {
+    color: var(--foreground-70);
+  }
+  
+  .text-foreground-50 {
+    color: var(--foreground-50);
+  }
+}
