@@ -1,83 +1,81 @@
-import { Code, Zap, BarChart3 } from "lucide-react";
+"use client";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { BarChart3, Code, Zap } from "lucide-react";
+import { useRef } from "react";
+
+const services = [
+  {
+    title: "Développement Full-Stack",
+    desc: "Applications robustes et scalables.",
+    icon: Code,
+    color: "bg-blue-500",
+  },
+  {
+    title: "Automatisation & IA",
+    desc: "Connectez vos outils, gagnez du temps.",
+    icon: Zap,
+    color: "bg-yellow-400",
+  },
+  {
+    title: "Data Visualization",
+    desc: "Transformez vos données en décisions.",
+    icon: BarChart3,
+    color: "bg-purple-500",
+  },
+];
 
 const ServicesSection = () => {
-  const services = [
-    {
-      icon: Code,
-      title: "Développement Web Full-Stack",
-      description:
-        "Applications web sur mesure avec React, Vue et Next.js. Interface moderne, performante et responsive.",
-      price: "À partir de 1 500€",
-    },
-    {
-      icon: Zap,
-      title: "Automatisation Intelligente",
-      description:
-        "Connectez vos outils avec n8n, Make ou Zapier. Automatisez les tâches répétitives et gagnez du temps.",
-      price: "À partir de 800€",
-    },
-    {
-      icon: BarChart3,
-      title: "Dashboards Analytiques",
-      description:
-        "Visualisez vos données en temps réel. KPIs, rapports automatiques et insights actionnables.",
-      price: "À partir de 1 200€",
-    },
-  ];
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: targetRef });
+
+  // Transforme le scroll vertical en mouvement horizontal
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66%"]);
 
   return (
-    <section className="w-full bg-background py-[120px] px-6 md:px-20">
-      <div className="max-w-[1280px] mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4">
-            Ce que je propose
-          </h2>
-          <p className="text-base md:text-lg text-foreground-70 font-sans max-w-2xl mx-auto">
-            Des solutions web qui génèrent des résultats
-          </p>
-        </div>
+    <section ref={targetRef} className="relative h-[300vh] bg-white text-black">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <motion.div style={{ x }} className="flex gap-10 px-20">
+          {/* Header Card */}
+          <div className="min-w-[400px] md:min-w-[600px] flex flex-col justify-center">
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-6">
+              Mon <br />
+              <span className="text-gray-400">Expertise.</span>
+            </h2>
+            <p className="text-xl max-w-md">
+              Des solutions techniques conçues pour la performance et
+              l&apos;impact business.
+            </p>
+          </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {services.map((service, index) => {
+          {/* Service Cards */}
+          {services.map((service, i) => {
             const Icon = service.icon;
             return (
               <div
-                key={index}
-                className="glass-subtle rounded-2xl p-8 md:p-12 border border-border hover-lift group transition-all duration-300 hover:border-accent hover:shadow-[0_0_20px_rgba(255,217,102,0.3)]"
+                key={i}
+                className="group relative h-[60vh] w-[80vw] md:w-[35vw] bg-[#f5f5f7] rounded-3xl p-10 flex flex-col justify-between border border-gray-200 hover:bg-black hover:text-white transition-colors duration-500"
               >
-                {/* Icon */}
-                <div className="mb-6 flex justify-center">
-                  <div className="w-16 h-16 rounded-xl bg-surface/50 border border-border flex items-center justify-center group-hover:border-accent transition-colors">
-                    <Icon className="w-8 h-8 text-foreground group-hover:text-accent transition-colors" />
-                  </div>
+                <div
+                  className={`w-16 h-16 rounded-full ${service.color} flex items-center justify-center mb-4`}
+                >
+                  <Icon className="w-8 h-8 text-white" />
                 </div>
-
-                {/* Title */}
-                <h3 className="text-xl md:text-2xl font-heading font-semibold text-foreground mb-4">
-                  {service.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm md:text-base text-foreground-70 font-sans mb-6 leading-relaxed">
-                  {service.description}
-                </p>
-
-                {/* Price */}
-                <div className="mt-auto">
-                  <p className="text-base md:text-lg font-semibold text-accent">
-                    {service.price}
+                <div>
+                  <h3 className="text-4xl font-bold mb-4">{service.title}</h3>
+                  <p className="text-lg text-gray-500 group-hover:text-gray-300">
+                    {service.desc}
                   </p>
+                </div>
+                <div className="text-9xl font-black text-gray-200 absolute bottom-4 right-4 group-hover:text-gray-800 transition-colors">
+                  0{i + 1}
                 </div>
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
 export default ServicesSection;
-

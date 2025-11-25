@@ -1,26 +1,20 @@
-interface TechItem {
-  name: string;
-  color?: string;
-}
-
-interface TechCategory {
-  title: string;
-  items: TechItem[];
-  gridCols: string;
-}
+// components/expertise-section.tsx
+"use client";
+import { motion } from "framer-motion";
+import MagneticItem from "./magnetic-tech";
 
 const ExpertiseSection = () => {
-  const categories: TechCategory[] = [
+  const categories = [
     {
       title: "Frontend",
-      gridCols: "grid-cols-3",
+      colSpan: "md:col-span-2",
       items: [
         { name: "React", color: "#61DAFB" },
         { name: "Vue.js", color: "#4FC08D" },
-        { name: "Next.js", color: "#000000" },
-        { name: "Tailwind CSS", color: "#06B6D4" },
+        { name: "Next.js", color: "#ffffff" },
+        { name: "Tailwind", color: "#06B6D4" },
         { name: "TypeScript", color: "#3178C6" },
-        { name: "Framer Motion", color: "#0055FF" },
+        { name: "Framer", color: "#0055FF" },
         { name: "Vite", color: "#646CFF" },
         { name: "SvelteKit", color: "#FF3E00" },
         { name: "Figma", color: "#F24E1E" },
@@ -28,162 +22,85 @@ const ExpertiseSection = () => {
     },
     {
       title: "Backend",
-      gridCols: "grid-cols-3",
+      colSpan: "md:col-span-1",
       items: [
         { name: "Node.js", color: "#339933" },
-        { name: "Express", color: "#000000" },
-        { name: "Fastify", color: "#000000" },
+        { name: "Express", color: "#ffffff" },
         { name: "Python", color: "#3776AB" },
         { name: "PostgreSQL", color: "#336791" },
-        { name: "Prisma", color: "#2D3748" },
+        { name: "Prisma", color: "#ffffff" },
+        { name: "Fastify", color: "#ffffff" },
       ],
     },
     {
-      title: "Automatisation & APIs",
-      gridCols: "grid-cols-2",
+      title: "Automatisation",
+      colSpan: "md:col-span-1",
       items: [
         { name: "n8n", color: "#FF6D5A" },
-        { name: "Make", color: "#000000" },
+        { name: "Make", color: "#ffffff" },
         { name: "Zapier", color: "#FF4A00" },
-        { name: "REST APIs", color: "#FFD966" },
+        { name: "APIs", color: "#FFD966" },
       ],
     },
     {
-      title: "DevOps & Cloud",
-      gridCols: "grid-cols-2",
+      title: "DevOps",
+      colSpan: "md:col-span-1",
       items: [
-        { name: "Vercel", color: "#000000" },
-        { name: "Railway", color: "#0B0D0E" },
-        { name: "Supabase", color: "#3ECF8E" },
-        { name: "GitHub", color: "#181717" },
+        { name: "Vercel", color: "#ffffff" },
         { name: "Docker", color: "#2496ED" },
-        { name: "Redis", color: "#DC382D" },
+        { name: "Supabase", color: "#3ECF8E" },
+        { name: "GitHub", color: "#ffffff" },
       ],
     },
   ];
 
   return (
-    <section className="w-full bg-background py-[120px] px-6 md:px-20">
+    <section className="w-full bg-[#050816] py-32 px-6 md:px-20">
       <div className="max-w-[1200px] mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4">
-            Technologies maîtrisées
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 font-syne">
+            Technologies
           </h2>
-          <p className="text-base md:text-lg text-foreground-70 font-sans max-w-2xl mx-auto">
-            Stack moderne pour des solutions performantes et scalables
+          <p className="text-lg text-gray-400">
+            Stack moderne pour performance maximale
           </p>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {/* Frontend - Largest block */}
-          <div className="md:col-span-2 glass-subtle rounded-2xl p-8 md:p-10 border border-border hover:border-accent transition-all duration-300">
-            <h3 className="text-xl md:text-2xl font-heading font-semibold text-accent mb-6">
-              Frontend
-            </h3>
-            <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-6">
-              {categories[0].items.map((tech, index) => (
-                <div
-                  key={index}
-                  className="group flex flex-col items-center cursor-pointer"
-                >
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-surface/50 border border-border flex items-center justify-center mb-2 group-hover:scale-110 group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(255,217,102,0.3)] transition-all duration-300 group-hover:rotate-[5deg]">
-                    <span
-                      className="text-xs md:text-sm font-bold text-foreground"
-                      style={{ color: tech.color || "#ffffff" }}
-                    >
-                      {tech.name.charAt(0)}
-                    </span>
-                  </div>
-                  <span className="text-xs md:text-sm text-foreground-70 font-sans text-center">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Backend */}
-          <div className="glass-subtle rounded-2xl p-8 md:p-10 border border-border hover:border-accent transition-all duration-300">
-            <h3 className="text-xl md:text-2xl font-heading font-semibold text-accent mb-6">
-              Backend
-            </h3>
-            <div className="grid grid-cols-3 gap-4 md:gap-6">
-              {categories[1].items.map((tech, index) => (
-                <div
-                  key={index}
-                  className="group flex flex-col items-center cursor-pointer"
-                >
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-surface/50 border border-border flex items-center justify-center mb-2 group-hover:scale-110 group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(255,217,102,0.3)] transition-all duration-300 group-hover:rotate-[5deg]">
-                    <span
-                      className="text-xs md:text-sm font-bold text-foreground"
-                      style={{ color: tech.color || "#ffffff" }}
-                    >
-                      {tech.name.charAt(0)}
-                    </span>
-                  </div>
-                  <span className="text-xs md:text-sm text-foreground-70 font-sans text-center">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Automatisation */}
-          <div className="glass-subtle rounded-2xl p-8 md:p-10 border border-border hover:border-accent transition-all duration-300">
-            <h3 className="text-xl md:text-2xl font-heading font-semibold text-accent mb-6">
-              Automatisation & APIs
-            </h3>
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {categories[2].items.map((tech, index) => (
-                <div
-                  key={index}
-                  className="group flex flex-col items-center cursor-pointer"
-                >
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-surface/50 border border-border flex items-center justify-center mb-2 group-hover:scale-110 group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(255,217,102,0.3)] transition-all duration-300 group-hover:rotate-[5deg]">
-                    <span
-                      className="text-xs md:text-sm font-bold text-foreground"
-                      style={{ color: tech.color || "#ffffff" }}
-                    >
-                      {tech.name.charAt(0)}
-                    </span>
-                  </div>
-                  <span className="text-xs md:text-sm text-foreground-70 font-sans text-center">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* DevOps */}
-          <div className="glass-subtle rounded-2xl p-8 md:p-10 border border-border hover:border-accent transition-all duration-300">
-            <h3 className="text-xl md:text-2xl font-heading font-semibold text-accent mb-6">
-              DevOps & Cloud
-            </h3>
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {categories[3].items.map((tech, index) => (
-                <div
-                  key={index}
-                  className="group flex flex-col items-center cursor-pointer"
-                >
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-surface/50 border border-border flex items-center justify-center mb-2 group-hover:scale-110 group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(255,217,102,0.3)] transition-all duration-300 group-hover:rotate-[5deg]">
-                    <span
-                      className="text-xs md:text-sm font-bold text-foreground"
-                      style={{ color: tech.color || "#ffffff" }}
-                    >
-                      {tech.name.charAt(0)}
-                    </span>
-                  </div>
-                  <span className="text-xs md:text-sm text-foreground-70 font-sans text-center">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {categories.map((cat, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className={`${cat.colSpan} bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-colors duration-500`}
+            >
+              <h3 className="text-2xl font-bold text-white mb-8 font-syne">
+                {cat.title}
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                {cat.items.map((tech, i) => (
+                  <MagneticItem key={i} className="group relative">
+                    <div className="flex flex-col items-center gap-2 cursor-pointer p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-lg"
+                        style={{
+                          color: tech.color,
+                          textShadow: `0 0 10px ${tech.color}40`,
+                        }}
+                      >
+                        {tech.name.charAt(0)}
+                      </div>
+                      <span className="text-xs text-gray-400 group-hover:text-white transition-colors">
+                        {tech.name}
+                      </span>
+                    </div>
+                  </MagneticItem>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -191,4 +108,3 @@ const ExpertiseSection = () => {
 };
 
 export default ExpertiseSection;
-
