@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio - Anani Serge
 
-## Getting Started
+Bienvenue sur le dépôt de mon portfolio personnel. Ce projet est une vitrine interactive de mes compétences, projets et expériences, conçu avec une attention particulière portée au design et à l'expérience utilisateur.
 
-First, run the development server:
+## 🛠 Technologies Utilisées
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Ce projet est construit avec une stack moderne axée sur la performance et l'animation :
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **[Next.js 16](https://nextjs.org/)** : Framework React pour le rendu côté serveur et la génération statique.
+- **[TypeScript](https://www.typescriptlang.org/)** : Pour un code robuste et typé.
+- **[Tailwind CSS](https://tailwindcss.com/)** : Framework CSS utilitaire pour un styling rapide et maintenable.
+- **[Framer Motion](https://www.framer.com/motion/)** : Bibliothèque d'animations pour React, utilisée pour les transitions fluides, le scroll parallax et les interactions.
+- **[Lucide React](https://lucide.dev/)** : Bibliothèque d'icônes légère et cohérente.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Fonctionnalités Clés
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Design Premium & Responsive** : Une interface soignée qui s'adapte parfaitement du mobile au desktop.
+- **Animations Fluides** : Utilisation intensive de Framer Motion pour des effets de scroll (parallax), des transitions d'éléments et des micro-interactions.
+- **Section Projets** : Présentation dynamique des projets avec effet de "stack" au scroll sur desktop.
+- **Section Expertise** : Mise en avant des compétences éditoriales et techniques.
+- **Contact Dynamique** : Pied de page avec mise à jour automatique de l'année et affichage de l'heure locale.
 
-## Learn More
+## 🚀 Installation et Démarrage
 
-To learn more about Next.js, take a look at the following resources:
+Pour lancer le projet localement sur votre machine :
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Cloner le dépôt :**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```bash
+    git clone <votre-url-de-depot>
+    cd portfolio
+    ```
 
-## Deploy on Vercel
+2.  **Installer les dépendances :**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    pnpm install
+    # ou
+    npm install
+    # ou
+    yarn install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3.  **Lancer le serveur de développement :**
+
+    ```bash
+    pnpm dev
+    # ou
+    npm run dev
+    ```
+
+4.  **Ouvrir le navigateur :**
+    Rendez-vous sur [http://localhost:3000](http://localhost:3000) pour voir le résultat.
+
+## 📁 Structure du Projet
+
+- `/app` : Pages et layout de l'application (App Router).
+- `/components` : Composants réutilisables (Hero, Projects, Contact, etc.).
+- `/public` : Assets statiques (images, polices).
+
+## 📝 Licence
+
+Ce projet est sous licence MIT.
