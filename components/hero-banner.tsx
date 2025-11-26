@@ -45,7 +45,7 @@ const HeroBanner = () => {
           style={{ y: yImage }}
           className="absolute bottom-0 z-10 flex justify-center items-end w-full h-full pointer-events-none"
         >
-          <div className="relative w-[70%] sm:w-[60%] md:w-[30%] lg:w-[20%] xl:w-[18%] max-w-[350px] mb-8 sm:mb-12 md:mb-16">
+          <div className="relative w-[85%] sm:w-[60%] md:w-[30%] lg:w-[20%] xl:w-[18%] max-w-[350px] mb-8 sm:mb-12 md:mb-16">
             <Image
               src="/serge.png"
               alt="Anani Serge"
@@ -60,7 +60,7 @@ const HeroBanner = () => {
         </motion.div>
 
         {/* Stats Card */}
-        <motion.div style={{ opacity }} className="absolute bottom-6 sm:bottom-8 md:bottom-12 z-20 left-1/2 -translate-x-1/2 w-fit max-w-[90%] px-4">
+        <motion.div style={{ opacity }} className="absolute bottom-15 sm:bottom-12 md:bottom-12 z-20 left-1/2 -translate-x-1/2 w-[90%] sm:w-fit px-4">
           <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-12 px-4 sm:px-6 md:px-10 lg:px-12 py-2.5 sm:py-3 md:py-4 lg:py-5 rounded-full border border-border bg-surface/50 backdrop-blur-md shadow-2xl glass-subtle mx-auto">
             <div className="flex flex-col items-center min-w-0">
               <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground font-heading whitespace-nowrap">

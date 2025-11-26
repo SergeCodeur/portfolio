@@ -28,7 +28,7 @@ const ContactSection = () => {
         <div className="mt-8 sm:mt-12">
           <button className="group relative px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full bg-white text-black font-bold text-base sm:text-lg md:text-xl overflow-hidden">
             <span className="relative z-10 group-hover:text-white transition-colors duration-300 break-all sm:break-normal">
-              serge@example.com
+              amoussougboserge@gmail.com
             </span>
             <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0"></div>
           </button>

@@ -2,12 +2,12 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowRight,
-  Code,
-  DollarSign,
-  Palette,
-  Phone,
-  Rocket,
+    ArrowRight,
+    Code,
+    DollarSign,
+    Palette,
+    Phone,
+    Rocket,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -174,10 +174,10 @@ const ProcessSection = () => {
                   transition={{ duration: 0.5, ease: [0.43, 0, 0.17, 1] }}
                   className="text-center z-10"
                 >
-                  <h3 className="text-6xl sm:text-7xl md:text-8xl font-black font-syne text-transparent bg-clip-text bg-linear-to-b from-white to-white/10 select-none">
+                  <h3 className="text-8xl font-black font-syne text-transparent bg-clip-text bg-linear-to-b from-white to-white/10 select-none">
                     0{steps[active].number}
                   </h3>
-                  <p className="text-accent text-xs sm:text-sm uppercase tracking-[0.3em] font-bold mt-1 sm:mt-2">
+                  <p className="text-accent text-2xl sm:text-xl md:text-lg lg:text-sm uppercase tracking-[0.3em] font-bold mt-1 sm:mt-2">
                     Phase
                   </p>
                 </motion.div>
