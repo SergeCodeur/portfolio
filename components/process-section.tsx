@@ -1,164 +1,258 @@
-// components/process-section.tsx
 "use client";
-import { motion, useScroll } from "framer-motion";
-import { Code, DollarSign, Palette, Phone, Rocket } from "lucide-react";
-import { useRef } from "react";
+
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowRight,
+  Code,
+  DollarSign,
+  Palette,
+  Phone,
+  Rocket,
+} from "lucide-react";
+import { useState } from "react";
+
+interface Step {
+  number: number;
+  icon: React.ElementType;
+  title: string;
+  duration: string;
+  detail?: string;
+  description: string;
+}
+
+const steps: Step[] = [
+  {
+    number: 1,
+    icon: Phone,
+    title: "Découverte",
+    duration: "30 min",
+    detail: "Gratuit",
+    description:
+      "Premier échange pour aligner la vision technique avec vos objectifs business.",
+  },
+  {
+    number: 2,
+    icon: DollarSign,
+    title: "Validation",
+    duration: "48h",
+    description:
+      "Devis détaillé, choix de la stack technique et planning prévisionnel.",
+  },
+  {
+    number: 3,
+    icon: Palette,
+    title: "Design",
+    duration: "Sprint 1",
+    detail: "Figma",
+    description:
+      "Conception des interfaces. On ne code rien tant que le design n'est pas validé.",
+  },
+  {
+    number: 4,
+    icon: Code,
+    title: "Development",
+    duration: "Sprint 2-3",
+    detail: "Agile",
+    description:
+      "Développement React/Next.js. Code propre, modulaire et optimisé SEO.",
+  },
+  {
+    number: 5,
+    icon: Rocket,
+    title: "Lancement",
+    duration: "Jour J",
+    detail: "Support",
+    description:
+      "Mise en production, configuration domaine/SSL et formation admin.",
+  },
+];
 
 const ProcessSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef as React.RefObject<HTMLDivElement>,
-    offset: ["start center", "end center"],
-  });
+  const [active, setActive] = useState(0);
+  const totalSteps = steps.length;
 
-  const steps = [
-    {
-      number: 1,
-      icon: Phone,
-      title: "Découverte",
-      duration: "30 min",
-      detail: "Gratuit",
-      description: "Appel pour comprendre votre vision et vos objectifs",
-    },
-    {
-      number: 2,
-      icon: DollarSign,
-      title: "Devis & Validation",
-      duration: "48h max",
-      description: "Proposition détaillée avec prix fixe et timeline",
-    },
-    {
-      number: 3,
-      icon: Palette,
-      title: "Conception Design",
-      duration: "1-2 semaines",
-      detail: "Figma + Révisions",
-      description: "Maquettes interactives avant tout développement",
-    },
-    {
-      number: 4,
-      icon: Code,
-      title: "Développement",
-      duration: "Selon projet",
-      detail: "Updates hebdo",
-      description: "Code propre, tests rigoureux, déploiement continu",
-    },
-    {
-      number: 5,
-      icon: Rocket,
-      title: "Livraison",
-      duration: "1 jour",
-      detail: "Support inclus",
-      description: "Documentation complète + 60j support",
-    },
-  ];
+  const handleNext = () => {
+    setActive((prev) => (prev + 1) % totalSteps);
+  };
+
+  const radius = 250;
+
+  const baseRotation = -90;
+  const stepAngle = 360 / totalSteps;
+  const rotation = baseRotation - active * stepAngle;
 
   return (
     <section
-      ref={containerRef}
-      className="w-full bg-[#050816] py-32 px-6 md:px-20 relative overflow-hidden"
+      id="process"
+      className="w-full bg-[#050816] py-12 sm:py-16 md:py-20 lg:py-32 px-4 sm:px-6 overflow-hidden min-h-[600px] sm:min-h-[700px] md:min-h-[800px] flex items-center justify-center relative"
     >
-      <div className="max-w-[1280px] mx-auto relative z-10">
-        {/* Header */}
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FDFD96] opacity-[0.03] blur-[100px] rounded-full pointer-events-none" />
+
+      <div className="relative w-full max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-24"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 font-syne">
-            Comment je travaille <br />
-            <span className="text-[#FDFD96]">avec vous</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter text-white mb-4 sm:mb-6 font-syne">
+            Mon <br />
+            <span className="text-accent">Process.</span>
           </h2>
-          <p className="text-lg text-gray-400 font-sans max-w-2xl mx-auto">
-            Un processus éprouvé, des résultats garantis
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 font-sans max-w-md mx-auto px-4">
+            De la découverte à la livraison, rien n&apos;est laissé au hasard.
           </p>
         </motion.div>
 
-        {/* Desktop Timeline */}
-        <div className="hidden md:block relative">
-          {/* Animated Line */}
-          <div className="absolute top-[36px] left-0 right-0 h-0.5 bg-white/10">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-10 md:gap-12 lg:gap-24">
+          {/* --- ORBITAL SYSTEM --- */}
+          {/* On utilise scale pour réduire proportionnellement sur mobile sans casser les calculs de pixels */}
+          <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.5] sm:scale-[0.6] md:scale-[0.75] lg:scale-100 transition-transform duration-500">
+            {/* Anneau décoratif principal (Correspond au rayon des items) */}
+            <div className="absolute inset-0 rounded-full border border-white/5" />
+
+            {/* Anneau intérieur pointillé */}
+            <div className="absolute inset-[25%] rounded-full border border-white/5 border-dashed animate-[spin_60s_linear_infinite]" />
+
+            {/* ROTATING CONTAINER */}
             <motion.div
-              style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
-              className="h-full bg-[#FDFD96]"
-            />
-          </div>
+              className="absolute inset-0 rounded-full"
+              animate={{ rotate: rotation }}
+              transition={{ type: "spring", stiffness: 80, damping: 25, mass: 0.8 }}
+            >
+              {steps.map((step, index) => {
+                const angle = index * stepAngle;
+                const finalAngle = angle + rotation;
+                const x = Math.cos((finalAngle * Math.PI) / 180) * radius;
+                const y = Math.sin((finalAngle * Math.PI) / 180) * radius;
 
-          <div className="relative flex justify-between">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={step.number}
-                  className="flex flex-col items-center flex-1 relative group"
-                >
-                  {/* Node */}
+                return (
                   <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: index * 0.2 }}
-                    viewport={{ once: true }}
-                    className="relative z-10 w-[72px] h-[72px] rounded-full bg-[#050816] border-[3px] border-[#FDFD96] flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(253,253,150,0.3)] transition-all duration-500"
+                    key={step.number}
+                    className="absolute top-1/2 left-1/2 w-24 h-24 -ml-12 -mt-12 flex items-center justify-center rounded-full cursor-pointer"
+                    animate={{
+                      x: x,
+                      y: y,
+                      rotate: -rotation,
+                    }}
+                    transition={{ type: "spring", stiffness: 80, damping: 25, mass: 0.8 }}
+                    onClick={() => setActive(index)}
                   >
-                    <span className="text-3xl font-bold text-white font-syne">
-                      {step.number}
-                    </span>
-                  </motion.div>
+                    {/* Le cercle de l'étape */}
+                    <div
+                      className={`relative w-full h-full rounded-full border-2 flex items-center justify-center transition-all duration-300 bg-[#050816] ${
+                        active === index
+                          ? "border-accent shadow-[0_0_30px_rgba(253,253,150,0.3)] scale-110"
+                          : "border-white/10 hover:border-white/30 hover:bg-white/5"
+                      }`}
+                    >
+                      <step.icon
+                        className={`w-8 h-8 transition-colors duration-300 ${
+                          active === index ? "text-accent" : "text-gray-500"
+                        }`}
+                      />
 
-                  {/* Card */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2 + 0.2 }}
-                    viewport={{ once: true }}
-                    className="mt-8 w-[220px] bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#FDFD96]/50 transition-colors duration-300"
-                  >
-                    <div className="flex justify-center mb-4">
-                      <div className="p-3 rounded-lg bg-white/5 text-[#FDFD96]">
-                        <Icon className="w-6 h-6" />
+                      {/* Badge Numéro */}
+                      <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-[#1c2230] border border-white/20 flex items-center justify-center text-xs font-bold text-white z-10">
+                        {step.number}
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-white text-center mb-2 font-syne">
-                      {step.title}
-                    </h3>
-                    <div className="flex justify-center gap-2 text-xs mb-3">
-                      <span className="font-bold text-[#FDFD96]">
-                        {step.duration}
-                      </span>
-                      {step.detail && (
-                        <span className="text-gray-400">• {step.detail}</span>
-                      )}
-                    </div>
-                    <p className="text-sm text-gray-400 text-center leading-relaxed">
-                      {step.description}
-                    </p>
                   </motion.div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                );
+              })}
+            </motion.div>
 
-        {/* Mobile Timeline (Simplified for brevity, keep your mobile logic here if needed) */}
-        <div className="md:hidden space-y-8 relative pl-8 border-l border-white/10 ml-4">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div key={index} className="relative">
-                <div className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-[#FDFD96] border-4 border-[#050816]" />
-                <div className="bg-white/5 p-6 rounded-xl border border-white/10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Icon className="w-5 h-5 text-[#FDFD96]" />
-                    <h3 className="text-xl font-bold text-white">
-                      {step.title}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-gray-400">{step.description}</p>
+            {/* CENTER CORE (Titre de la phase active) */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+                  transition={{ duration: 0.5, ease: [0.43, 0, 0.17, 1] }}
+                  className="text-center z-10"
+                >
+                  <h3 className="text-6xl sm:text-7xl md:text-8xl font-black font-syne text-transparent bg-clip-text bg-linear-to-b from-white to-white/10 select-none">
+                    0{steps[active].number}
+                  </h3>
+                  <p className="text-accent text-xs sm:text-sm uppercase tracking-[0.3em] font-bold mt-1 sm:mt-2">
+                    Phase
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* --- CONTENT PANEL (Right side) --- */}
+          <div className="flex-1 max-w-md relative min-h-[250px] sm:min-h-[300px] z-20 px-4 sm:px-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, ease: [0.43, 0, 0.17, 1] }}
+                className="flex flex-col justify-center h-full"
+              >
+                {/* Top Meta Data */}
+                <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                  <div className="h-[2px] w-8 sm:w-12 bg-accent" />
+                  <span className="text-accent text-xs sm:text-sm font-bold uppercase tracking-widest">
+                    {steps[active].duration}
+                  </span>
                 </div>
-              </div>
-            );
-          })}
+
+                {/* Title */}
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white font-syne mb-4 sm:mb-6 leading-[1.1]">
+                  {steps[active].title}
+                </h2>
+
+                {/* Description */}
+                <p className="text-base sm:text-lg text-gray-400 leading-relaxed mb-6 sm:mb-10">
+                  {steps[active].description}
+                </p>
+
+                {/* Footer Actions */}
+                <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+                  {steps[active].detail && (
+                    <div className="px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300">
+                      Inclus :{" "}
+                      <span className="text-white font-bold ml-1">
+                        {steps[active].detail}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Bouton Next Actif */}
+                  <button
+                    onClick={handleNext}
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent flex items-center justify-center hover:scale-110 hover:shadow-[0_0_20px_rgba(253,253,150,0.5)] transition-all duration-300 cursor-pointer group shrink-0"
+                    aria-label="Étape suivante"
+                  >
+                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-black group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Mobile Navigation Dots */}
+            <div className="absolute -bottom-8 sm:-bottom-12 lg:bottom-0 lg:-left-12 flex lg:flex-col gap-2 sm:gap-3">
+              {steps.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  className={`rounded-full transition-all duration-300 ${
+                    active === i
+                      ? "w-6 sm:w-8 h-1 sm:h-1.5 lg:w-1.5 lg:h-8 bg-accent"
+                      : "w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Aller à l'étape ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

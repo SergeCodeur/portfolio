@@ -4,122 +4,86 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const HeroBanner = () => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const yText = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const yImage = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Parallax effects
+  const yText = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const yImage = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
     <div
       ref={containerRef}
-      className="relative h-screen w-full overflow-hidden bg-[#050816] flex flex-col items-center justify-center"
+      className="relative min-h-screen w-full bg-background text-foreground overflow-hidden font-heading flex flex-col"
     >
-      {/* Background Noise Texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none z-0 mix-blend-overlay"
-        style={{
-          backgroundImage:
-            'url("https://grainy-gradients.vercel.app/noise.svg")',
-        }}
-      ></div>
-
-      {/* Text Layer - Parallax Down */}
-      <motion.div
-        style={{ y: yText, opacity }}
-        className="relative z-10 flex flex-col items-center text-center"
-      >
-        <h1 className="text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-white mix-blend-difference">
-          <span className="block overflow-hidden">
-            <motion.span
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-              className="block"
-            >
-              Développeur
-            </motion.span>
-          </span>
-        </h1>
-
-        <div className="flex gap-[4vw] md:gap-[10vw]">
-          <h1 className="text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-white/90">
-            <span className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.1,
-                  ease: [0.76, 0, 0.24, 1],
-                }}
-                className="block"
-              >
-                Web
-              </motion.span>
-            </span>
+      <div className="grow flex flex-col items-center justify-center relative pt-20 sm:pt-24">
+        {/* Text Layer - Parallax Down */}
+        <motion.div
+          style={{ y: yText, opacity }}
+          className="absolute top-32 sm:top-36 md:top-32 lg:top-28 left-0 right-0 flex flex-col items-center w-full z-20 select-none px-4"
+        >
+          <h1 className="text-[10vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-foreground drop-shadow-2xl">
+            Développeur
           </h1>
-          <h1 className="text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-[#FDFD96]">
-            <span className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.2,
-                  ease: [0.76, 0, 0.24, 1],
-                }}
-                className="block"
-              >
-                Créatif
-              </motion.span>
+
+          <div className="flex w-full justify-center gap-[3vw] sm:gap-[4vw] md:gap-12 lg:gap-16 mt-0.5 sm:mt-1 md:mt-2">
+            <span className="text-[10vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-foreground drop-shadow-2xl">
+              Web
             </span>
-          </h1>
-        </div>
-      </motion.div>
-
-      {/* Image Layer - Parallax Up */}
-      <motion.div
-        style={{ y: yImage }}
-        className="absolute bottom-0 z-20 w-[90%] md:w-[40%] max-w-[600px]"
-      >
-        <Image
-          src="/serge.png" // Assure-toi que l'image est détourée (PNG transparent)
-          alt="Anani Serge"
-          width={600}
-          height={800}
-          className="w-full h-auto object-contain drop-shadow-2xl"
-          priority
-        />
-        {/* Gradient Mask to blend bottom */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-[#050816] to-transparent" />
-      </motion.div>
-
-      {/* Floating Stats - Glassmorphism */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-10 z-30 hidden md:flex gap-12 px-8 py-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10"
-      >
-        <div className="text-center">
-          <div className="text-3xl font-bold text-white font-syne">+3</div>
-          <div className="text-xs text-gray-400 uppercase tracking-widest">
-            Années
+            <span className="text-[10vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-accent drop-shadow-2xl">
+              Créatif
+            </span>
           </div>
-        </div>
-        <div className="w-px bg-white/10"></div>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-white font-syne">+15</div>
-          <div className="text-xs text-gray-400 uppercase tracking-widest">
-            Projets
+        </motion.div>
+
+        {/* Image Layer - Parallax Up */}
+        <motion.div
+          style={{ y: yImage }}
+          className="absolute bottom-0 z-10 flex justify-center items-end w-full h-full pointer-events-none"
+        >
+          <div className="relative w-[70%] sm:w-[60%] md:w-[30%] lg:w-[20%] xl:w-[18%] max-w-[350px] mb-8 sm:mb-12 md:mb-16">
+            <Image
+              src="/serge.png"
+              alt="Anani Serge"
+              width={320}
+              height={427}
+              className="w-full h-auto object-contain drop-shadow-2xl opacity-70"
+              priority
+            />
+
+            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-linear-to-t from-background via-background/80 to-transparent"></div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        {/* Stats Card */}
+        <motion.div style={{ opacity }} className="absolute bottom-6 sm:bottom-8 md:bottom-12 z-20 left-1/2 -translate-x-1/2 w-fit max-w-[90%] px-4">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-12 px-4 sm:px-6 md:px-10 lg:px-12 py-2.5 sm:py-3 md:py-4 lg:py-5 rounded-full border border-border bg-surface/50 backdrop-blur-md shadow-2xl glass-subtle mx-auto">
+            <div className="flex flex-col items-center min-w-0">
+              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground font-heading whitespace-nowrap">
+                +3
+              </span>
+              <span className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs uppercase tracking-widest text-foreground-70 font-semibold mt-0.5 sm:mt-1 text-center leading-tight">
+                Années d&apos;expérience
+              </span>
+            </div>
+
+            <div className="w-px h-8 sm:h-10 md:h-12 bg-border shrink-0"></div>
+
+            <div className="flex flex-col items-center min-w-0">
+              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground font-heading whitespace-nowrap">
+                +15
+              </span>
+              <span className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs uppercase tracking-widest text-foreground-70 font-semibold mt-0.5 sm:mt-1 text-center leading-tight">
+                Projets Web Réalisés
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };

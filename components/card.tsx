@@ -51,33 +51,33 @@ export const Card = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`, // Décalage progressif pour voir les cartes du dessous
         }}
-        className="flex flex-col relative -top-[25%] h-[500px] w-[90%] md:w-[1000px] rounded-[30px] p-8 md:p-12 origin-top border border-white/10 shadow-2xl overflow-hidden"
+        className="flex flex-col relative -top-[25%] h-[450px] sm:h-[500px] w-[95%] sm:w-[90%] md:w-[1000px] rounded-[20px] sm:rounded-[25px] md:rounded-[30px] p-6 sm:p-8 md:p-12 origin-top border border-white/10 shadow-2xl overflow-hidden"
       >
-        <div className="flex h-full gap-10 flex-col md:flex-row">
+        <div className="flex h-full gap-6 sm:gap-8 md:gap-10 flex-col md:flex-row">
           {/* Contenu Texte */}
           <div className="w-full md:w-[40%] relative z-10 flex flex-col justify-between">
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold font-syne text-[#050816] mb-4 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-syne text-[#050816] mb-3 sm:mb-4 leading-tight">
                 {title}
               </h2>
-              <p className="text-base md:text-lg text-[#050816]/70 font-sans leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-[#050816]/70 font-sans leading-relaxed">
                 {description}
               </p>
             </div>
 
-            <div className="flex items-center gap-4 mt-6 md:mt-0">
+            <div className="flex items-center gap-4 mt-4 sm:mt-6 md:mt-0">
               <Link
                 href={url}
-                className="flex items-center gap-2 text-[#050816] font-bold uppercase tracking-widest text-sm border-b border-[#050816] pb-1 cursor-pointer hover:opacity-70 transition-opacity"
+                className="flex items-center gap-2 text-[#050816] font-bold uppercase tracking-widest text-xs sm:text-sm border-b border-[#050816] pb-1 cursor-pointer hover:opacity-70 transition-opacity"
               >
                 Voir le projet
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
               </Link>
             </div>
           </div>
 
           {/* Contenu Image avec Masque et Parallax */}
-          <div className="relative w-full md:w-[60%] h-full rounded-2xl overflow-hidden shadow-inner">
+          <div className="relative w-full md:w-[60%] h-[200px] sm:h-[250px] md:h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
             <motion.div
               style={{ scale: imageScale }}
               className="w-full h-full relative"
