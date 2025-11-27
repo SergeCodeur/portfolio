@@ -17,9 +17,13 @@ const HeroBanner = () => {
   const transition = { duration: 1, ease: [0.76, 0, 0.24, 1] as const };
 
   const textReveal: Variants = {
-    hidden: { y: "110%" },
+    hidden: {
+      y: "110%",
+      opacity: 0,
+    },
     visible: (i: number) => ({
       y: "0%",
+      opacity: 1,
       transition: { ...transition, delay: i * 0.15 },
     }),
   };
@@ -52,23 +56,25 @@ const HeroBanner = () => {
         {/* Text Layer - Parallax Down */}
         <motion.div
           style={{ y: yText, opacity }}
-          className="absolute top-32 sm:top-36 md:top-32 lg:top-28 left-0 right-0 flex flex-col items-center w-full z-20 select-none px-4"
+          className="absolute top-32 sm:top-36 md:top-32 lg:top-28 left-0 right-0 flex flex-col items-center w-full z-20 select-none px-2 sm:px-4"
           initial="hidden"
           animate="visible"
         >
-          <h1 className="text-[10vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-foreground drop-shadow-2xl overflow-hidden">
+          {/* Ligne 1 : DÉVELOPPEUR */}
+          <h1 className="text-[8.5vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-foreground drop-shadow-2xl overflow-hidden pb-4 -mb-4 text-center w-full">
             <motion.span custom={0} variants={textReveal} className="block">
               Développeur
             </motion.span>
           </h1>
 
-          <div className="flex w-full justify-center gap-[3vw] sm:gap-[4vw] md:gap-12 lg:gap-16 mt-0.5 sm:mt-1 md:mt-2">
-            <span className="text-[10vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-foreground drop-shadow-2xl overflow-hidden">
+          {/* Ligne 2 : WEB CRÉATIF */}
+          <div className="flex w-full justify-center items-center gap-2 sm:gap-[4vw] md:gap-12 lg:gap-16 mt-0.5 sm:mt-1 md:mt-2 flex-nowrap whitespace-nowrap">
+            <span className="text-[8.5vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-foreground drop-shadow-2xl overflow-hidden pb-4 -mb-4 px-1">
               <motion.span custom={1} variants={textReveal} className="block">
                 Web
               </motion.span>
             </span>
-            <span className="text-[10vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-accent drop-shadow-2xl overflow-hidden">
+            <span className="text-[8.5vw] sm:text-[8vw] md:text-[6rem] lg:text-[8rem] leading-[0.95] font-extrabold tracking-tighter text-accent drop-shadow-2xl overflow-hidden pb-4 -mb-4 px-1">
               <motion.span custom={2} variants={textReveal} className="block">
                 Créatif
               </motion.span>
@@ -76,6 +82,7 @@ const HeroBanner = () => {
           </div>
         </motion.div>
 
+        {/* Image Layer - Parallax Up */}
         <motion.div
           style={{ y: yImage }}
           className="absolute bottom-0 z-10 flex justify-center items-end w-full h-full pointer-events-none"
@@ -98,6 +105,7 @@ const HeroBanner = () => {
           </motion.div>
         </motion.div>
 
+        {/* Stats Card */}
         <motion.div
           style={{ opacity }}
           className="absolute bottom-16 sm:bottom-12 md:bottom-12 z-20 left-1/2 -translate-x-1/2 w-[90%] sm:w-fit px-4"
