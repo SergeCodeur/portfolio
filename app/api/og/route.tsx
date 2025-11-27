@@ -22,8 +22,7 @@ async function loadGoogleFont(font: string, text: string) {
 export async function GET() {
   try {
     const titleText = "Anani Serge AMOUSSOUGBO";
-    const subtitleText =
-      "Développeur Web Full-Stack & Expert en Automatisations";
+    const subtitleText = "Développeur Web Full-Stack & Automatisations";
     const bodyText = "React Next.js TypeScript n8n Automatisation Dashboards";
 
     return new ImageResponse(
@@ -195,7 +194,8 @@ export async function GET() {
                   fontWeight: 400,
                 }}
               >
-                Expert en automatisations & dashboards analytiques.
+                Boostez votre productivité grâce au développement web et à
+                l&apos;automatisation.
               </p>
             </div>
 

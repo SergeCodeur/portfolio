@@ -16,15 +16,17 @@ const syne = Syne({
 
 export const metadata = {
   title: "Anani Serge - Développeur Web Full-Stack",
-  description: "Expert en automatisations & dashboards. React, Next.js, n8n.",
+  description:
+    "Développeur Web Full-Stack. Je transforme vos idées en applications performantes et booste votre productivité grâce à l'automatisation.",
   openGraph: {
     title: "Anani Serge - Développeur Web Full-Stack",
-    description: "Expert en automatisations & dashboards. React, Next.js, n8n.",
-    url: "https://serge-amoussougbo.dev",
+    description:
+      "Développeur Web Full-Stack. Je transforme vos idées en applications performantes et booste votre productivité grâce à l'automatisation.",
+    url: "https://serge-codeur.vercel.app",
     siteName: "Anani Serge Portfolio",
     images: [
       {
-        url: "/api/og", // 👈 Ta route
+        url: "/api/og",
         width: 1200,
         height: 630,
         alt: "Anani Serge - Portfolio",
@@ -36,7 +38,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Anani Serge - Développeur Web Full-Stack",
-    description: "Expert en automatisations & dashboards. React, Next.js, n8n.",
+    description:
+      "Développeur Web Full-Stack. Je transforme vos idées en applications performantes et booste votre productivité grâce à l'automatisation.",
     images: ["/api/og"],
   },
 };
