@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 
@@ -15,10 +14,31 @@ const syne = Syne({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Anani Serge AMOUSSOUGBO - Développeur Web Créatif",
-  description:
-    "Portfolio de Anani Serge AMOUSSOUGBO, développeur web créatif avec plus de 3 ans d'expérience et 15+ projets réalisés.",
+export const metadata = {
+  title: "Anani Serge - Développeur Web Full-Stack",
+  description: "Expert en automatisations & dashboards. React, Next.js, n8n.",
+  openGraph: {
+    title: "Anani Serge - Développeur Web Full-Stack",
+    description: "Expert en automatisations & dashboards. React, Next.js, n8n.",
+    url: "https://serge-amoussougbo.dev",
+    siteName: "Anani Serge Portfolio",
+    images: [
+      {
+        url: "/api/og", // 👈 Ta route
+        width: 1200,
+        height: 630,
+        alt: "Anani Serge - Portfolio",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anani Serge - Développeur Web Full-Stack",
+    description: "Expert en automatisations & dashboards. React, Next.js, n8n.",
+    images: ["/api/og"],
+  },
 };
 
 export default function RootLayout({
