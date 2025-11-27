@@ -114,9 +114,9 @@ const ProcessSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-10 md:gap-12 lg:gap-24"
         >
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-10 md:gap-12 lg:gap-24">
-            {/* --- ORBITAL SYSTEM --- */}
-            <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.5] sm:scale-[0.6] md:scale-[0.75] lg:scale-100 transition-transform duration-500">
+          {/* --- ORBITAL SYSTEM --- */}
+          <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[375px] md:h-[375px] lg:w-[500px] lg:h-[500px] shrink-0">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] scale-[0.5] sm:scale-[0.6] md:scale-[0.75] lg:scale-100 transition-transform duration-500 origin-center">
               {/* Anneau décoratif principal (Correspond au rayon des items) */}
               <div className="absolute inset-0 rounded-full border border-white/5" />
 
@@ -202,74 +202,74 @@ const ProcessSection = () => {
                 </AnimatePresence>
               </div>
             </div>
+          </div>
 
-            {/* --- CONTENT PANEL (Right side) --- */}
-            <div className="flex-1 max-w-md relative min-h-[250px] sm:min-h-[300px] z-20 px-4 sm:px-0">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.6, ease: [0.43, 0, 0.17, 1] }}
-                  className="flex flex-col justify-center h-full"
-                >
-                  {/* Top Meta Data */}
-                  <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    <div className="h-[2px] w-8 sm:w-12 bg-accent" />
-                    <span className="text-accent text-xs sm:text-sm font-bold uppercase tracking-widest">
-                      {steps[active].duration}
-                    </span>
-                  </div>
+          {/* --- CONTENT PANEL (Right side) --- */}
+          <div className="flex-1 max-w-md relative min-h-[250px] sm:min-h-[300px] z-20 px-4 sm:px-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, ease: [0.43, 0, 0.17, 1] }}
+                className="flex flex-col justify-center h-full"
+              >
+                {/* Top Meta Data */}
+                <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                  <div className="h-[2px] w-8 sm:w-12 bg-accent" />
+                  <span className="text-accent text-xs sm:text-sm font-bold uppercase tracking-widest">
+                    {steps[active].duration}
+                  </span>
+                </div>
 
-                  {/* Title */}
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white font-syne mb-4 sm:mb-6 leading-[1.1]">
-                    {steps[active].title}
-                  </h2>
+                {/* Title */}
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white font-syne mb-4 sm:mb-6 leading-[1.1]">
+                  {steps[active].title}
+                </h2>
 
-                  {/* Description */}
-                  <p className="text-base sm:text-lg text-gray-400 leading-relaxed mb-6 sm:mb-10">
-                    {steps[active].description}
-                  </p>
+                {/* Description */}
+                <p className="text-base sm:text-lg text-gray-400 leading-relaxed mb-6 sm:mb-10">
+                  {steps[active].description}
+                </p>
 
-                  {/* Footer Actions */}
-                  <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
-                    {steps[active].detail && (
-                      <div className="px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300">
-                        Inclus :{" "}
-                        <span className="text-white font-bold ml-1">
-                          {steps[active].detail}
-                        </span>
-                      </div>
-                    )}
+                {/* Footer Actions */}
+                <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+                  {steps[active].detail && (
+                    <div className="px-4 sm:px-5 py-2 sm:py-3 rounded-xl bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300">
+                      Inclus :{" "}
+                      <span className="text-white font-bold ml-1">
+                        {steps[active].detail}
+                      </span>
+                    </div>
+                  )}
 
-                    {/* Bouton Next Actif */}
-                    <button
-                      onClick={handleNext}
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent flex items-center justify-center hover:scale-110 hover:shadow-[0_0_20px_rgba(253,253,150,0.5)] transition-all duration-300 cursor-pointer group shrink-0"
-                      aria-label="Étape suivante"
-                    >
-                      <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-black group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Mobile Navigation Dots */}
-              <div className="absolute -bottom-8 sm:-bottom-12 lg:bottom-0 lg:-left-12 flex lg:flex-col gap-2 sm:gap-3">
-                {steps.map((_, i) => (
+                  {/* Bouton Next Actif */}
                   <button
-                    key={i}
-                    onClick={() => setActive(i)}
-                    className={`rounded-full transition-all duration-300 ${
-                      active === i
-                        ? "w-6 sm:w-8 h-1 sm:h-1.5 lg:w-1.5 lg:h-8 bg-accent"
-                        : "w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/20 hover:bg-white/40"
-                    }`}
-                    aria-label={`Aller à l'étape ${i + 1}`}
-                  />
-                ))}
-              </div>
+                    onClick={handleNext}
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent flex items-center justify-center hover:scale-110 hover:shadow-[0_0_20px_rgba(253,253,150,0.5)] transition-all duration-300 cursor-pointer group shrink-0"
+                    aria-label="Étape suivante"
+                  >
+                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-black group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Mobile Navigation Dots */}
+            <div className="absolute -bottom-8 sm:-bottom-12 lg:bottom-0 lg:-left-12 flex lg:flex-col gap-2 sm:gap-3">
+              {steps.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  className={`rounded-full transition-all duration-300 ${
+                    active === i
+                      ? "w-6 sm:w-8 h-1 sm:h-1.5 lg:w-1.5 lg:h-8 bg-accent"
+                      : "w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Aller à l'étape ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
         </motion.div>
