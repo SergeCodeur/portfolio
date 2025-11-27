@@ -52,17 +52,25 @@ const ProjectsSection = () => {
     <section
       id="projects"
       ref={container}
-      className="relative bg-[#050816] px-4 md:px-0"
+      className="relative bg-background px-4 md:px-0"
     >
       {/* Mobile Header - Not Sticky */}
       <div className="md:hidden py-12 px-4">
         <div className="text-center w-full max-w-full">
-          <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-white font-syne leading-[0.95] uppercase mb-2">
-            Projets
-          </h2>
-          <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-accent font-syne leading-[0.95] uppercase">
-            Phares
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center w-full max-w-full"
+          >
+            <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-foreground font-syne leading-[0.95] uppercase mb-2">
+              Projets
+            </h2>
+            <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-accent font-syne leading-[0.95] uppercase">
+              Phares
+            </h2>
+          </motion.div>
         </div>
       </div>
 

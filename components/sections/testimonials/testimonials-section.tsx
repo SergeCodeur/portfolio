@@ -1,4 +1,3 @@
-// components/testimonials-section.tsx
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
@@ -47,12 +46,18 @@ const TestimonialsSection = () => {
       </div>
 
       <div className="max-w-[1000px] mx-auto relative z-10">
-        <div className="mb-12 sm:mb-16 md:mb-20 text-center md:text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12 sm:mb-16 md:mb-20 text-center md:text-left"
+        >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter text-white mb-4 sm:mb-6 font-syne">
             Clients <br />
             <span className="text-accent">Heureux.</span>
           </h2>
-        </div>
+        </motion.div>
 
         <div className="min-h-[300px] sm:min-h-[350px] md:min-h-[400px] flex flex-col justify-between">
           <AnimatePresence mode="wait">
@@ -75,27 +80,35 @@ const TestimonialsSection = () => {
                   <h4 className="text-base sm:text-lg md:text-xl text-white font-bold">
                     {testimonials[active].name}
                   </h4>
-                  <p className="text-sm sm:text-base text-gray-400">{testimonials[active].role}</p>
+                  <p className="text-sm sm:text-base text-gray-400">
+                    {testimonials[active].role}
+                  </p>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
 
           {/* Controls */}
-          <div className="flex gap-3 sm:gap-4 mt-8 sm:mt-12">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="flex gap-3 sm:gap-4 mt-8 sm:mt-12"
+          >
             <button
               onClick={prev}
-              className="p-3 sm:p-4 rounded-full border border-white/10 text-white hover:bg-white hover:text-black transition-colors"
+              className="p-3 sm:p-4 rounded-full border border-white/10 text-white hover:bg-primary hover:text-background transition-colors"
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
             <button
               onClick={next}
-              className="p-3 sm:p-4 rounded-full border border-white/10 text-white hover:bg-white hover:text-black transition-colors"
+              className="p-3 sm:p-4 rounded-full border border-white/10 text-white hover:bg-primary hover:text-background transition-colors"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

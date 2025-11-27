@@ -34,10 +34,8 @@ export const Card = ({
     offset: ["start end", "start start"],
   });
 
-  // Animation de l'échelle de l'image à l'intérieur de la carte (Parallax interne)
   const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
 
-  // Animation de la carte elle-même (L'effet d'empilement)
   const scale = useTransform(progress, range, [1, targetScale]);
 
   return (
@@ -49,7 +47,7 @@ export const Card = ({
         style={{
           backgroundColor: color,
           scale,
-          top: `calc(-5vh + ${i * 25}px)`, // Décalage progressif pour voir les cartes du dessous
+          top: `calc(-5vh + ${i * 25}px)`,
         }}
         className="flex flex-col relative -top-[25%] h-[450px] sm:h-[500px] w-[95%] sm:w-[90%] md:w-[1000px] rounded-[20px] sm:rounded-[25px] md:rounded-[30px] p-6 sm:p-8 md:p-12 origin-top border border-white/10 shadow-2xl overflow-hidden"
       >
@@ -76,7 +74,6 @@ export const Card = ({
             </div>
           </div>
 
-          {/* Contenu Image avec Masque et Parallax */}
           <div className="relative w-full md:w-[60%] h-[200px] sm:h-[250px] md:h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
             <motion.div
               style={{ scale: imageScale }}

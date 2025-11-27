@@ -135,8 +135,25 @@
     box-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
   }
   
-  /* Smooth transitions */
-  * {
+  /* Lenis Scroll */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  /* Smooth transitions - Scoped to interactive elements instead of global * for performance */
+  a, button, input, .transition-all {
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;

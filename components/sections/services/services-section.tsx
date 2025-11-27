@@ -1,4 +1,3 @@
-// components/services-section.tsx
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { BarChart3, Code, Zap } from "lucide-react";
@@ -29,11 +28,10 @@ const ServicesSection = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
 
-  // Transforme le scroll vertical en mouvement horizontal (desktop uniquement)
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
 
   return (
-    <section ref={targetRef} className="relative bg-white text-black">
+    <section ref={targetRef} className="relative bg-white text-background">
       {/* Mobile Layout - Vertical Stack */}
       <div className="md:hidden py-12 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
@@ -45,11 +43,11 @@ const ServicesSection = () => {
             transition={{ duration: 0.6, ease: [0.43, 0, 0.17, 1] }}
             className="mb-12"
           >
-            <h2 className="text-4xl sm:text-5xl font-black tracking-tighter mb-4 sm:mb-6 text-[#050816] font-heading">
+            <h2 className="text-4xl sm:text-5xl font-black tracking-tighter mb-4 sm:mb-6 text-background font-heading">
               Mon <br />
-              <span className="text-[#050816]/50">Expertise.</span>
+              <span className="text-background/50">Expertise.</span>
             </h2>
-            <p className="text-base sm:text-lg max-w-md text-[#050816]/70 font-sans">
+            <p className="text-base sm:text-lg max-w-md text-background/70 font-sans">
               Des solutions techniques conçues pour la performance et
               l&apos;impact business.
             </p>
@@ -72,19 +70,18 @@ const ServicesSection = () => {
                   }}
                   className="group relative min-h-[300px] sm:min-h-[350px] bg-[#f5f5f7] rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-border/20 hover:bg-[#050816] hover:text-foreground hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,217,102,0.2)] transition-all duration-500 overflow-hidden"
                 >
-                  {/* Contenu principal (Z-Index élevé pour passer au dessus du numéro) */}
                   <div className="relative z-10 flex flex-col h-full justify-between">
                     <div
                       className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full ${service.color} flex items-center justify-center mb-3 sm:mb-4 shrink-0 group-hover:bg-accent group-hover:shadow-[0_0_20px_rgba(255,217,102,0.4)] transition-all duration-500`}
                     >
-                      <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white group-hover:text-[#050816] transition-colors duration-500" />
+                      <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white group-hover:text-background transition-colors duration-500" />
                     </div>
 
                     <div>
-                      <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 leading-tight wrap-break-word hyphens-auto text-[#050816] group-hover:text-foreground transition-colors duration-500 font-heading">
+                      <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 leading-tight wrap-break-word hyphens-auto text-background group-hover:text-foreground transition-colors duration-500 font-heading">
                         {service.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-[#050816]/70 group-hover:text-foreground-70 leading-relaxed font-sans">
+                      <p className="text-sm sm:text-base text-background/70 group-hover:text-foreground-70 leading-relaxed font-sans">
                         {service.desc}
                       </p>
                     </div>
