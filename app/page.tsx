@@ -1,11 +1,11 @@
-import ContactSection from "@/components/contact-section";
-import ExpertiseEditorial from "@/components/expertise-editorial";
-import HeroSection from "@/components/hero-section";
-import ProcessSection from "@/components/process-section";
-import ProjectsSection from "@/components/projects-section";
-import ServicesSection from "@/components/services-section";
-import SmoothScroll from "@/components/smooth-scroll";
-import TestimonialsSection from "@/components/testimonials-section";
+import SmoothScroll from "@/components/layout/smooth-scroll";
+import ContactBento from "@/components/sections/contact/contact-bento";
+import ExpertiseEditorial from "@/components/sections/expertise/expertise-editorial";
+import HeroSection from "@/components/sections/hero/hero-section";
+import ProcessSection from "@/components/sections/process/process-section";
+import ProjectsSection from "@/components/sections/projects/projects-section";
+import ServicesSection from "@/components/sections/services/services-section";
+import TestimonialsSection from "@/components/sections/testimonials/testimonials-section";
 
 export default function Home() {
   return (
@@ -13,12 +13,12 @@ export default function Home() {
       <main className="bg-[#050816] min-h-screen w-full selection:bg-accent selection:text-black">
         <HeroSection />
         <ServicesSection />
-        <div className="bg-[#050816] relative z-20">
+        <div className="relative z-20">
           <ProcessSection />
           <ProjectsSection />
           <ExpertiseEditorial />
           <TestimonialsSection />
-          <ContactSection />
+          <ContactBento />
         </div>
       </main>
     </SmoothScroll>

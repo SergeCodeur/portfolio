@@ -1,4 +1,4 @@
-import Topbar from "./topbar";
+import Topbar from "@/components/layout/topbar";
 import HeroBanner from "./hero-banner";
 
 const HeroSection = () => {
