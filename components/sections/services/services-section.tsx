@@ -83,7 +83,7 @@ const ServicesSection = () => {
           <div className="mt-auto pt-5 laptop:pt-6 laptop-lg:pt-6 border-t border-gray-200 group-hover:border-white/10 transition-colors duration-300">
             {/* Livrables */}
             <div className="flex items-center gap-2 mb-3 laptop:mb-4 laptop-lg:mb-4 text-xs sm:text-xs laptop:text-sm laptop-lg:text-sm font-bold text-[#050816] group-hover:text-white transition-colors">
-              <CheckCircle2 className="w-4 h-4 laptop:w-4 laptop:h-4 laptop-lg:w-4 laptop-lg:h-4 text-green-500 group-hover:text-accent flex-shrink-0" />
+              <CheckCircle2 className="w-4 h-4 laptop:w-4 laptop:h-4 laptop-lg:w-4 laptop-lg:h-4 text-green-500 group-hover:text-accent shrink-0" />
               <span>Inclus : {service.deliverables}</span>
             </div>
 

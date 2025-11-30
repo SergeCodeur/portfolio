@@ -25,8 +25,8 @@ const TopbarMagnetic = () => {
         className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-12 py-4 sm:py-6 flex justify-between items-center bg-linear-to-b from-[#050816] to-transparent pointer-events-auto"
       >
         {/* Logo Area */}
-        <div className="flex items-center gap-2 sm:gap-4 glass-subtle px-2 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border bg-surface/50 backdrop-blur-md">
-          <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden shrink-0">
+        <div className="flex items-center gap-2 sm:gap-4 glass-subtle px-2 sm:px-4 py-1.5 xl:py-2 rounded-full border border-border bg-surface/50 backdrop-blur-md">
+          <div className="relative w-6 h-6 sm:w-7 sm:h-7 rounded-full overflow-hidden shrink-0">
             <Image
               src="/serge.webp"
               alt="Profile"
