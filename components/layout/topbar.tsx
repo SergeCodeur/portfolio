@@ -28,7 +28,7 @@ const TopbarMagnetic = () => {
         <div className="flex items-center gap-2 sm:gap-4 glass-subtle px-2 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border bg-surface/50 backdrop-blur-md">
           <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden shrink-0">
             <Image
-              src="/serge.png"
+              src="/serge.webp"
               alt="Profile"
               width={32}
               height={32}
