@@ -14,6 +14,7 @@ const projects = [
     src: "/projets.jpg",
     link: "https://www.google.com",
     color: "#EFECEC",
+    textColor: "#050816",
   },
   {
     title: "E-commerce Luxe",
@@ -22,6 +23,7 @@ const projects = [
     src: "/projets.jpg",
     link: "https://www.google.com",
     color: "#C6C4BD",
+    textColor: "#050816",
   },
   {
     title: "CRM Immobilier",
@@ -30,6 +32,7 @@ const projects = [
     src: "/projets.jpg",
     link: "https://www.google.com",
     color: "#A3A3A3",
+    textColor: "#050816",
   },
   {
     title: "Crypto Tracker",
@@ -38,6 +41,7 @@ const projects = [
     src: "/projets.jpg",
     link: "https://www.google.com",
     color: "#2C2C2C",
+    textColor: "#FFFFFF",
   },
 ];
 
@@ -109,10 +113,16 @@ const ProjectsSection = () => {
                 {/* Contenu Texte */}
                 <div className="relative z-10 flex flex-col justify-between flex-1">
                   <div>
-                    <h2 className="text-2xl sm:text-3xl font-bold font-syne text-[#050816] mb-3 sm:mb-4 leading-tight">
+                    <h2
+                      style={{ color: project.textColor }}
+                      className="text-2xl sm:text-3xl font-bold font-syne mb-3 sm:mb-4 leading-tight"
+                    >
                       {project.title}
                     </h2>
-                    <p className="text-sm sm:text-base text-[#050816]/70 font-sans leading-relaxed">
+                    <p
+                      style={{ color: project.textColor }}
+                      className="text-sm sm:text-base font-sans leading-relaxed opacity-70"
+                    >
                       {project.description}
                     </p>
                   </div>
@@ -120,7 +130,11 @@ const ProjectsSection = () => {
                   <div className="flex items-center gap-4 mt-6 sm:mt-8">
                     <Link
                       href={project.link}
-                      className="flex items-center gap-2 text-[#050816] font-bold uppercase tracking-widest text-xs sm:text-sm border-b border-[#050816] pb-1 cursor-pointer hover:opacity-70 transition-opacity"
+                      style={{
+                        color: project.textColor,
+                        borderColor: project.textColor,
+                      }}
+                      className="flex items-center gap-2 font-bold uppercase tracking-widest text-xs sm:text-sm border-b pb-1 cursor-pointer hover:opacity-70 transition-opacity"
                     >
                       Voir le projet
                       <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />

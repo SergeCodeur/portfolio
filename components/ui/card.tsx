@@ -15,6 +15,7 @@ interface CardProps {
   progress: MotionValue<number>;
   range: number[];
   targetScale: number;
+  textColor?: string;
 }
 
 export const Card = ({
@@ -27,6 +28,7 @@ export const Card = ({
   progress,
   range,
   targetScale,
+  textColor = "#050816",
 }: CardProps) => {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -55,10 +57,16 @@ export const Card = ({
           {/* Contenu Texte */}
           <div className="w-full md:w-[40%] relative z-10 flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-syne text-[#050816] mb-3 sm:mb-4 leading-tight">
+              <h2
+                style={{ color: textColor }}
+                className="text-2xl sm:text-3xl md:text-5xl font-bold font-syne mb-3 sm:mb-4 leading-tight"
+              >
                 {title}
               </h2>
-              <p className="text-sm sm:text-base md:text-lg text-[#050816]/70 font-sans leading-relaxed">
+              <p
+                style={{ color: textColor }}
+                className="text-sm sm:text-base md:text-lg font-sans leading-relaxed opacity-70"
+              >
                 {description}
               </p>
             </div>
@@ -66,7 +74,8 @@ export const Card = ({
             <div className="flex items-center gap-4 mt-4 sm:mt-6 md:mt-0">
               <Link
                 href={url}
-                className="flex items-center gap-2 text-[#050816] font-bold uppercase tracking-widest text-xs sm:text-sm border-b border-[#050816] pb-1 cursor-pointer hover:opacity-70 transition-opacity"
+                style={{ color: textColor, borderColor: textColor }}
+                className="flex items-center gap-2 font-bold uppercase tracking-widest text-xs sm:text-sm border-b pb-1 cursor-pointer hover:opacity-70 transition-opacity"
               >
                 Voir le projet
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
