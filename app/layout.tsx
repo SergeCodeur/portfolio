@@ -15,6 +15,7 @@ const syne = Syne({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://serge-codeur.vercel.app"),
   title: "Anani Serge - Développeur Web Full-Stack",
   description:
     "Développeur Web Full-Stack. Je transforme vos idées en applications performantes et booste votre productivité grâce à l'automatisation.",
