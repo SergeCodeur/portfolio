@@ -33,6 +33,7 @@ const TopbarMagnetic = () => {
               width={32}
               height={32}
               className="object-cover"
+              priority
             />
           </div>
           <span className="text-xs sm:text-sm font-bold text-white tracking-wide hidden sm:inline">
@@ -58,6 +59,7 @@ const TopbarMagnetic = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(true)}
+          aria-label="Ouvrir le menu"
           className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-accent flex items-center justify-center text-black shrink-0"
         >
           <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -82,6 +84,7 @@ const TopbarMagnetic = () => {
             <div className="flex justify-end mb-8 sm:mb-12">
               <button
                 onClick={() => setIsOpen(false)}
+                aria-label="Fermer le menu"
                 className="p-2 bg-white/10 rounded-full text-white"
               >
                 <X className="w-6 h-6 sm:w-8 sm:h-8" />

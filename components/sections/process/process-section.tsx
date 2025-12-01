@@ -125,7 +125,7 @@ const ProcessSection = () => {
 
               {/* ROTATING CONTAINER */}
               <motion.div
-                className="absolute inset-0 rounded-full"
+                className="absolute inset-0 rounded-full will-change-transform"
                 animate={{ rotate: rotation }}
                 transition={{
                   type: "spring",

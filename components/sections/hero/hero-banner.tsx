@@ -56,7 +56,7 @@ const HeroBanner = () => {
         {/* Text Layer - Parallax Down */}
         <motion.div
           style={{ y: yText, opacity }}
-          className="absolute top-32 sm:top-36 md:top-32 lg:top-28 laptop:top-36 left-0 right-0 flex flex-col items-center w-full z-20 select-none px-2 sm:px-4"
+          className="absolute top-32 sm:top-36 md:top-32 lg:top-28 laptop:top-36 left-0 right-0 flex flex-col items-center w-full z-20 select-none px-2 sm:px-4 will-change-transform"
           initial="hidden"
           animate="visible"
         >
@@ -85,7 +85,7 @@ const HeroBanner = () => {
         {/* Image Layer - Parallax Up */}
         <motion.div
           style={{ y: yImage }}
-          className="absolute bottom-0 z-10 flex justify-center items-end w-full h-full pointer-events-none"
+          className="absolute bottom-0 z-10 flex justify-center items-end w-full h-full pointer-events-none will-change-transform"
         >
           <motion.div
             initial="hidden"

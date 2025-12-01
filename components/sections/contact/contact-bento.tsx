@@ -133,7 +133,7 @@ const ContactBento = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-12 sm:mt-16 md:mt-20 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 border-t border-white/10 pt-6 sm:pt-8 text-gray-500 text-xs sm:text-sm uppercase tracking-widest">
+        <div className="mt-12 sm:mt-16 md:mt-20 flex flex-row justify-between items-center border-t border-white/10 pt-6 sm:pt-8 text-gray-400 text-xs sm:text-sm uppercase tracking-widest">
           <span>© {new Date().getFullYear()} Anani Serge</span>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
