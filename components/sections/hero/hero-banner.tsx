@@ -99,7 +99,8 @@ const HeroBanner = () => {
               width={320}
               height={427}
               className="w-full h-auto object-contain drop-shadow-2xl"
-              priority
+              priority={true}
+              fetchPriority="high"
               sizes="(max-width: 640px) 70vw, (max-width: 1024px) 40vw, 25vw"
             />
             <div className="absolute bottom-0 left-0 w-full h-1/3 bg-linear-to-t from-background via-background/80 to-transparent"></div>
