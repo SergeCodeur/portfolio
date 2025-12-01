@@ -34,7 +34,7 @@ const HeroBanner = () => {
       opacity: 0.7,
       scale: 1,
       y: 0,
-      transition: { duration: 1.4, ease: "easeOut", delay: 0.5 },
+      transition: { duration: 1.0, ease: "easeOut", delay: 0.2 },
     },
   };
 
