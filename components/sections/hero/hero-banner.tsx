@@ -14,7 +14,7 @@ const HeroBanner = () => {
   const yImage = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const transition = { duration: 1, ease: [0.76, 0, 0.24, 1] as const };
+  const transition = { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const };
 
   const textReveal: Variants = {
     hidden: {
@@ -24,7 +24,7 @@ const HeroBanner = () => {
     visible: (i: number) => ({
       y: "0%",
       opacity: 1,
-      transition: { ...transition, delay: i * 0.15 },
+      transition: { ...transition, delay: i * 0.1 },
     }),
   };
 
@@ -34,7 +34,7 @@ const HeroBanner = () => {
       opacity: 0.7,
       scale: 1,
       y: 0,
-      transition: { duration: 1.0, ease: "easeOut", delay: 0.2 },
+      transition: { duration: 0.8, ease: "easeOut", delay: 0 },
     },
   };
 
