@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 
@@ -54,6 +55,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning={true} className="dark">
       <body className={`${inter.variable} ${syne.variable} antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
