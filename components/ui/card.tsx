@@ -51,11 +51,11 @@ export const Card = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className="flex flex-col relative -top-[25%] h-[450px] sm:h-[500px] w-[95%] sm:w-[90%] md:w-[1000px] rounded-[20px] sm:rounded-[25px] md:rounded-[30px] p-6 sm:p-8 md:p-12 origin-top border border-white/10 shadow-2xl overflow-hidden"
+        className="flex flex-col relative -top-[25%] h-[450px] sm:h-[480px] md:h-[500px] w-[95%] sm:w-[90%] md:w-[1200px] rounded-[20px] sm:rounded-[25px] md:rounded-[30px] p-6 sm:p-8 md:p-12 origin-top border border-white/10 shadow-2xl overflow-hidden"
       >
         <div className="flex h-full gap-6 sm:gap-8 md:gap-10 flex-col md:flex-row">
           {/* Contenu Texte */}
-          <div className="w-full md:w-[40%] relative z-10 flex flex-col justify-between">
+          <div className="w-full md:w-[35%] relative z-10 flex flex-col justify-between">
             <div>
               <h2
                 style={{ color: textColor }}
@@ -83,12 +83,12 @@ export const Card = ({
             </div>
           </div>
 
-          <div className="relative w-full md:w-[60%] h-[200px] sm:h-[250px] md:h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
+          <div className="relative w-full md:w-[65%] h-[200px] sm:h-[250px] md:h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
             <motion.div
               style={{ scale: imageScale }}
               className="w-full h-full relative"
             >
-              <Image fill src={src} alt={title} className="object-cover" />
+              <Image fill src={src} alt={title} className="object-contain" />
             </motion.div>
           </div>
         </div>

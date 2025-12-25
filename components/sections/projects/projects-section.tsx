@@ -8,40 +8,40 @@ import { useRef } from "react";
 
 const projects = [
   {
-    title: "Dashboard Agence",
+    title: "Tokena App",
     description:
-      "Une interface de gestion complète pour agences digitales, intégrant analytique temps réel et gestion d'équipe automatisée.",
-    src: "/projets.jpg",
-    link: "https://www.google.com",
-    color: "#EFECEC",
-    textColor: "#050816",
-  },
-  {
-    title: "E-commerce Luxe",
-    description:
-      "Expérience d'achat immersive pour une marque de haute couture. Architecture Headless Shopify + Next.js pour une rapidité extrême.",
-    src: "/projets.jpg",
-    link: "https://www.google.com",
-    color: "#C6C4BD",
-    textColor: "#050816",
-  },
-  {
-    title: "CRM Immobilier",
-    description:
-      "Plateforme SaaS B2B révolutionnant la gestion de biens. Cartographie interactive et matching IA pour les agents.",
-    src: "/projets.jpg",
-    link: "https://www.google.com",
-    color: "#A3A3A3",
-    textColor: "#050816",
-  },
-  {
-    title: "Crypto Tracker",
-    description:
-      "Application Fintech temps réel. Websockets pour les cours, graphiques SVG animés et sécurité bancaire.",
-    src: "/projets.jpg",
-    link: "https://www.google.com",
-    color: "#2C2C2C",
+      "Plateforme complète de suivi d'investissements en cryptomonnaie avec tableau de bord en temps réel. Développée en Next.js lors du challenge FigmaToCode Edition 2, elle offre une expérience utilisateur moderne pour la gestion de portefeuille crypto.",
+    src: "/Tokena.webp",
+    link: "https://tokena.vercel.app",
+    color: "#1E293B",
     textColor: "#FFFFFF",
+  },
+  {
+    title: "Equinox",
+    description:
+      "Plateforme d'apprentissage innovante alimentée par l'intelligence artificielle. Développée en Next.js, elle révolutionne l'expérience éducative avec des outils d'apprentissage personnalisés et une interface moderne.",
+    src: "/Equinox.webp",
+    link: "https://equinox-drab.vercel.app/",
+    color: "#0F172A",
+    textColor: "#FFFFFF",
+  },
+  {
+    title: "Ballamas",
+    description:
+      "Site web de vente en ligne spécialisé dans la mode contemporaine et les vêtements décontractés. Collection variée avec navigation intuitive et design minimaliste moderne, reflétant une démarche responsable dans la production.",
+    src: "/Site-e-commerce-de-mode-Ballamas.webp",
+    link: "https://figma-to-code-ed2-week2-zeta.vercel.app/",
+    color: "#F5F5F5",
+    textColor: "#050816",
+  },
+  {
+    title: "Doctor",
+    description:
+      "Site web et tableau de bord médical fictif développé en Next.js lors du challenge FigmaToCode. Interface moderne et professionnelle pour la gestion de rendez-vous médicaux, avec un design épuré mettant en avant la confiance et la qualité des soins.",
+    src: "/Doctor.webp",
+    link: "https://doctor-kohl.vercel.app/",
+    color: "#E8F4F8",
+    textColor: "#050816",
   },
 ];
 
@@ -107,9 +107,9 @@ const ProjectsSection = () => {
                 delay: i * 0.15,
               }}
               style={{ backgroundColor: project.color }}
-              className="flex flex-col relative h-auto min-h-[400px] sm:min-h-[450px] w-full rounded-[20px] sm:rounded-[25px] p-6 sm:p-8 border border-white/10 shadow-2xl overflow-hidden"
+              className="flex flex-col relative h-auto min-h-[380px] min-[375px]:min-h-[400px] sm:min-h-[450px] w-full rounded-[20px] sm:rounded-[25px] p-6 sm:p-8 border border-white/10 shadow-2xl overflow-hidden"
             >
-              <div className="flex h-full gap-6 sm:gap-8 flex-col">
+              <div className="flex h-full gap-5 min-[375px]:gap-6 sm:gap-8 flex-col">
                 {/* Contenu Texte */}
                 <div className="relative z-10 flex flex-col justify-between flex-1">
                   <div>
@@ -127,7 +127,7 @@ const ProjectsSection = () => {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-4 mt-6 sm:mt-8">
+                  <div className="flex items-center gap-4 mt-5 min-[375px]:mt-6 sm:mt-8">
                     <Link
                       href={project.link}
                       style={{
@@ -143,13 +143,13 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Contenu Image */}
-                <div className="relative w-full h-[200px] sm:h-[250px] rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
+                <div className="relative w-full h-[120px] min-[375px]:h-[153px] min-[425px]:h-[180px] sm:h-[320px] rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
                   <div className="w-full h-full relative">
                     <Image
                       fill
                       src={project.src}
                       alt={project.title}
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </div>
                 </div>

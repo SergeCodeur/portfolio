@@ -5,7 +5,7 @@ import { useState } from "react";
 const techStack = [
   {
     category: "Frontend",
-    description: "Interfaces réactives et animations fluides",
+    description: "Interfaces modernes, performantes et accessibles",
     items: [
       "React",
       "Next.js",
@@ -17,18 +17,18 @@ const techStack = [
   },
   {
     category: "Backend",
-    description: "Architecture solide et bases de données",
-    items: ["Node.js", "PostgreSQL", "Supabase", "Python", "Prisma"],
+    description: "APIs REST/GraphQL, bases de données relationnelles et NoSQL",
+    items: ["Node.js", "Express", "PostgreSQL", "Supabase", "Python", "Prisma"],
   },
   {
     category: "Automatisation",
-    description: "Workflows et connexions API",
-    items: ["n8n", "Make", "Zapier", "OpenAI API"],
+    description: "Automatisation de workflows et intégrations API",
+    items: ["n8n", "Make", "Zapier", "Webhooks"],
   },
   {
     category: "DevOps",
-    description: "Déploiement et CI/CD",
-    items: ["Vercel", "Docker", "Git", "AWS"],
+    description: "Déploiement, conteneurisation et infrastructure cloud",
+    items: ["Vercel", "Docker", "GitHub Actions", "AWS"],
   },
 ];
 

@@ -9,23 +9,30 @@ const TestimonialsSection = () => {
     {
       id: 1,
       quote:
-        "Anani a dépassé toutes nos attentes. Le dashboard a complètement transformé notre façon de travailler.",
-      name: "Marie Kouassi",
-      role: "Directrice Marketing, Digital Boost",
+        "Notre site e-commerce Next.js a augmenté nos ventes de 40% en 3 mois. Code propre et facile à maintenir.",
+      name: "Sophie Mensah",
+      role: "Fondatrice, E-commerce Plus",
     },
     {
       id: 2,
       quote:
-        "Le système d'automatisation nous fait gagner plus de 20 heures par semaine. Livraison parfaite.",
+        "L'automatisation n8n connecte maintenant notre CRM, emailing et comptabilité. On gagne 25h/semaine et les erreurs manuelles ont disparu.",
       name: "Jean-Baptiste Adou",
       role: "CEO, Tech Solutions Bénin",
     },
     {
       id: 3,
       quote:
-        "Travail de qualité supérieure. Il a su comprendre nos besoins complexes pour une solution sur mesure.",
-      name: "Sophie Mensah",
-      role: "Fondatrice, E-commerce Plus",
+        "Le dashboard avec Shopify et Stripe nous permet de prendre des décisions éclairées. Interface intuitive et données à jour.",
+      name: "Marie Kouassi",
+      role: "Directrice Marketing, Digital Boost",
+    },
+    {
+      id: 4,
+      quote:
+        "Application SaaS livrée en 8 semaines avec toutes les fonctionnalités. Équipe ravie, très professionnel.",
+      name: "David Koffi",
+      role: "CTO, StartupLab",
     },
   ];
 

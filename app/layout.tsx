@@ -16,7 +16,7 @@ const syne = Syne({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://serge-codeur.vercel.app"),
+  metadataBase: new URL("https://sergecodeur.com"),
   title: "Anani Serge - Développeur Web Full-Stack",
   description:
     "Développeur Web Full-Stack. Je transforme vos idées en applications performantes et booste votre productivité grâce à l'automatisation.",
@@ -24,7 +24,7 @@ export const metadata = {
     title: "Anani Serge - Développeur Web Full-Stack",
     description:
       "Développeur Web Full-Stack. Je transforme vos idées en applications performantes et booste votre productivité grâce à l'automatisation.",
-    url: "https://serge-codeur.vercel.app",
+    url: "https://sergecodeur.com",
     siteName: "Anani Serge Portfolio",
     images: [
       {

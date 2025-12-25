@@ -54,7 +54,7 @@ const ServicesSection = () => {
   const ServiceCard = ({ service }: { service: ServiceItem }) => {
     const Icon = service.icon;
     return (
-      <div className="group relative h-full bg-[#f5f5f7] rounded-3xl p-6 sm:p-7 laptop:p-8 laptop-lg:p-8 flex flex-col border border-gray-200 hover:bg-[#050816] hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,217,102,0.15)] transition-all duration-500 overflow-hidden">
+      <div className="group relative h-full bg-[#f5f5f7] rounded-3xl p-6 sm:p-7 laptop:p-8 laptop-lg:p-8 flex flex-col border border-gray-200 overflow-hidden">
         {/* Contenu principal (Z-Index élevé) */}
         <div className="relative z-10 flex flex-col h-full">
           {/* Header: Icon & Title */}
@@ -65,25 +65,25 @@ const ServicesSection = () => {
               <Icon className="w-6 h-6 sm:w-6.5 sm:h-6.5 laptop:w-7 laptop:h-7 laptop-lg:w-7 laptop-lg:h-7 text-white" />
             </div>
             <div>
-              <h3 className="text-2xl sm:text-2.5xl laptop:text-3xl laptop-lg:text-3xl font-bold text-[#050816] group-hover:text-white transition-colors duration-300 font-heading leading-tight mb-1">
+              <h3 className="text-2xl sm:text-2.5xl laptop:text-3xl laptop-lg:text-3xl font-bold text-[#050816] font-heading leading-tight mb-1">
                 {service.title}
               </h3>
-              <p className="text-xs sm:text-xs laptop:text-sm laptop-lg:text-sm font-bold text-gray-600 group-hover:text-accent uppercase tracking-wider">
+              <p className="text-xs sm:text-xs laptop:text-sm laptop-lg:text-sm font-bold text-gray-600 uppercase tracking-wider">
                 {service.subtitle}
               </p>
             </div>
           </div>
 
           {/* Body: Description */}
-          <p className="text-sm sm:text-sm laptop:text-base laptop-lg:text-base text-gray-600 group-hover:text-gray-300 leading-relaxed font-sans mb-6 laptop:mb-7 laptop-lg:mb-8">
+          <p className="text-sm sm:text-sm laptop:text-base laptop-lg:text-base text-gray-600 leading-relaxed font-sans mb-6 laptop:mb-7 laptop-lg:mb-8">
             {service.desc}
           </p>
 
           {/* Footer: Details & Tags */}
-          <div className="mt-auto pt-5 laptop:pt-6 laptop-lg:pt-6 border-t border-gray-200 group-hover:border-white/10 transition-colors duration-300">
+          <div className="mt-auto pt-5 laptop:pt-6 laptop-lg:pt-6 border-t border-gray-200">
             {/* Livrables */}
-            <div className="flex items-center gap-2 mb-3 laptop:mb-4 laptop-lg:mb-4 text-xs sm:text-xs laptop:text-sm laptop-lg:text-sm font-bold text-[#050816] group-hover:text-white transition-colors">
-              <CheckCircle2 className="w-4 h-4 laptop:w-4 laptop:h-4 laptop-lg:w-4 laptop-lg:h-4 text-green-500 group-hover:text-accent shrink-0" />
+            <div className="flex items-center gap-2 mb-3 laptop:mb-4 laptop-lg:mb-4 text-xs sm:text-xs laptop:text-sm laptop-lg:text-sm font-bold text-[#050816]">
+              <CheckCircle2 className="w-4 h-4 laptop:w-4 laptop:h-4 laptop-lg:w-4 laptop-lg:h-4 text-green-500 shrink-0" />
               <span>Inclus : {service.deliverables}</span>
             </div>
 
@@ -92,7 +92,7 @@ const ServicesSection = () => {
               {service.examples.map((ex, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 laptop:px-3 laptop:py-1 laptop-lg:px-3 laptop-lg:py-1 rounded-md bg-white border border-gray-200 text-[10px] sm:text-[10px] laptop:text-xs laptop-lg:text-xs font-bold text-gray-500 uppercase tracking-wide group-hover:bg-white/10 group-hover:border-white/10 group-hover:text-gray-300 transition-colors"
+                  className="px-3 py-1 laptop:px-3 laptop:py-1 laptop-lg:px-3 laptop-lg:py-1 rounded-md bg-white border border-gray-200 text-[10px] sm:text-[10px] laptop:text-xs laptop-lg:text-xs font-bold text-gray-500 uppercase tracking-wide"
                 >
                   {ex}
                 </span>
