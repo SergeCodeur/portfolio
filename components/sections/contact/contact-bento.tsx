@@ -28,9 +28,9 @@ const ContactBento = () => {
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-2 bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500 min-h-[280px] sm:min-h-[320px] lg:min-h-0"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="lg:col-span-2 bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500 min-h-[280px] sm:min-h-80 lg:min-h-0"
           >
             <div>
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ffd966] flex items-center justify-center mb-4 sm:mb-6">
@@ -56,8 +56,8 @@ const ContactBento = () => {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
               className="bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-center gap-3 sm:gap-4 lg:flex-1"
             >
               <span className="text-xs uppercase tracking-widest text-gray-500 mb-1 sm:mb-2">
@@ -101,34 +101,38 @@ const ContactBento = () => {
               ))}
             </motion.div>
 
-            <motion.a
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              href="https://calendly.com/serge-amoussougbo/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-primary rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-background flex flex-col justify-center group cursor-pointer relative overflow-hidden min-h-[160px] sm:min-h-[180px] lg:flex-1"
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              className="lg:flex-1"
             >
-              <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
-                <div className="flex items-center gap-2">
-                  <Calendar size={18} className="sm:w-5 sm:h-5" />
-                  <span className="font-bold uppercase tracking-wide text-xs sm:text-sm">
-                    Appel Gratuit
-                  </span>
+              <Link
+                href="https://calendly.com/serge-amoussougbo/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-background flex flex-col justify-center group cursor-pointer relative overflow-hidden min-h-40 sm:min-h-[180px] h-full"
+              >
+                <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
+                  <div className="flex items-center gap-2">
+                    <Calendar size={18} className="sm:w-5 sm:h-5" />
+                    <span className="font-bold uppercase tracking-wide text-xs sm:text-sm">
+                      Appel Gratuit
+                    </span>
+                  </div>
+                  <ArrowUpRight
+                    size={24}
+                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                  />
                 </div>
-                <ArrowUpRight
-                  size={24}
-                  className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                />
-              </div>
-              <div className="text-3xl sm:text-4xl font-black font-syne relative z-10 leading-tight">
-                Réserver <br /> 30 min.
-              </div>
+                <div className="text-3xl sm:text-4xl font-black font-syne relative z-10 leading-tight">
+                  Réserver <br /> 30 min.
+                </div>
 
-              <div className="absolute -bottom-10 -right-10 w-24 h-24 sm:w-32 sm:h-32 bg-black/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-            </motion.a>
+                <div className="absolute -bottom-10 -right-10 w-24 h-24 sm:w-32 sm:h-32 bg-black/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              </Link>
+            </motion.div>
           </div>
         </div>
 

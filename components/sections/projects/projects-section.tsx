@@ -8,13 +8,22 @@ import { useRef } from "react";
 
 const projects = [
   {
+    title: "Subvio",
+    description:
+      "Application SaaS de gestion d'abonnements permettant de visualiser, analyser et optimiser tous vos services en un seul endroit. Interface moderne avec tableau de bord intuitif, suivi des dépenses récurrentes et alertes de renouvellement pour une maîtrise totale de vos abonnements.",
+    src: "/subvio.png",
+    link: "https://subvio.sergeamoussougbo.com",
+    color: "#0A0A0B",
+    textColor: "#FFFFFF",
+  },
+  {
     title: "Tokena App",
     description:
       "Plateforme complète de suivi d'investissements en cryptomonnaie avec tableau de bord en temps réel. Développée en Next.js lors du challenge FigmaToCode Edition 2, elle offre une expérience utilisateur moderne pour la gestion de portefeuille crypto.",
     src: "/Tokena.webp",
     link: "https://tokena.vercel.app",
-    color: "#1E293B",
-    textColor: "#FFFFFF",
+    color: "#E8ECF1",
+    textColor: "#1E293B",
   },
   {
     title: "Equinox",
@@ -22,7 +31,7 @@ const projects = [
       "Plateforme d'apprentissage innovante alimentée par l'intelligence artificielle. Développée en Next.js, elle révolutionne l'expérience éducative avec des outils d'apprentissage personnalisés et une interface moderne.",
     src: "/Equinox.webp",
     link: "https://equinox-drab.vercel.app/",
-    color: "#0F172A",
+    color: "#1A1625",
     textColor: "#FFFFFF",
   },
   {
@@ -40,8 +49,8 @@ const projects = [
       "Site web et tableau de bord médical fictif développé en Next.js lors du challenge FigmaToCode. Interface moderne et professionnelle pour la gestion de rendez-vous médicaux, avec un design épuré mettant en avant la confiance et la qualité des soins.",
     src: "/Doctor.webp",
     link: "https://doctor-kohl.vercel.app/",
-    color: "#E8F4F8",
-    textColor: "#050816",
+    color: "#EEF4F8",
+    textColor: "#1E3A5F",
   },
 ];
 
@@ -143,7 +152,7 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Contenu Image */}
-                <div className="relative w-full h-[120px] min-[375px]:h-[153px] min-[425px]:h-[180px] sm:h-[320px] rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
+                <div className="relative w-full h-[120px] min-[375px]:h-[153px] min-[425px]:h-[180px] sm:h-80 rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
                   <div className="w-full h-full relative">
                     <Image
                       fill
