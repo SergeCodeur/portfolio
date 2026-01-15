@@ -2,7 +2,7 @@
 
 Bienvenue sur le dépôt de mon portfolio personnel. Ce projet est une vitrine interactive de mes compétences, projets et expériences, conçu avec une attention particulière portée au design et à l'expérience utilisateur.
 
-## 🛠 Technologies Utilisées
+## Technologies Utilisées
 
 Ce projet est construit avec une stack moderne axée sur la performance et l'animation :
 
@@ -12,7 +12,7 @@ Ce projet est construit avec une stack moderne axée sur la performance et l'ani
 - **[Framer Motion](https://www.framer.com/motion/)** : Bibliothèque d'animations pour React, utilisée pour les transitions fluides, le scroll parallax et les interactions.
 - **[Lucide React](https://lucide.dev/)** : Bibliothèque d'icônes légère et cohérente.
 
-## ✨ Fonctionnalités Clés
+## Fonctionnalités Clés
 
 - **Design Premium & Responsive** : Une interface soignée qui s'adapte parfaitement du mobile au desktop.
 - **Animations Fluides** : Utilisation intensive de Framer Motion pour des effets de scroll (parallax), des transitions d'éléments et des micro-interactions.
@@ -20,7 +20,7 @@ Ce projet est construit avec une stack moderne axée sur la performance et l'ani
 - **Section Expertise** : Mise en avant des compétences éditoriales et techniques.
 - **Contact Dynamique** : Pied de page avec mise à jour automatique de l'année et affichage de l'heure locale.
 
-## 🚀 Installation et Démarrage
+## Installation et Démarrage
 
 Pour lancer le projet localement sur votre machine :
 
@@ -52,12 +52,12 @@ Pour lancer le projet localement sur votre machine :
 4.  **Ouvrir le navigateur :**
     Rendez-vous sur [http://localhost:3000](http://localhost:3000) pour voir le résultat.
 
-## 📁 Structure du Projet
+## Structure du Projet
 
 - `/app` : Pages et layout de l'application (App Router).
 - `/components` : Composants réutilisables (Hero, Projects, Contact, etc.).
 - `/public` : Assets statiques (images, polices).
 
-## 📝 Licence
+## Licence
 
 Ce projet est sous licence MIT.
