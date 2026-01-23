@@ -30,7 +30,7 @@ const ContactBento = () => {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="lg:col-span-2 bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500 min-h-[280px] sm:min-h-80 lg:min-h-0"
+            className="md:col-span-2 bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500 min-h-[280px] sm:min-h-80 lg:min-h-0"
           >
             <div>
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ffd966] flex items-center justify-center mb-4 sm:mb-6">

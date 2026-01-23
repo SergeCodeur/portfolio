@@ -88,14 +88,23 @@ const ProjectsSection = () => {
       </div>
 
       {/* Desktop Header - Sticky */}
-      <div className="hidden md:flex h-[40vh] sm:h-[45vh] md:h-[50vh] items-center justify-center sticky top-0 z-0 px-4 overflow-hidden">
+      <div className="hidden md:flex min-h-[50vh] items-center justify-center sticky top-0 z-0 px-4 overflow-hidden">
         <div className="text-center w-full max-w-full">
           {/* Ligne 1 : Arrière-plan */}
-          <h2 className="text-[10vw] sm:text-[9vw] md:text-[8vw] lg:text-[11vw] font-black tracking-tighter text-white font-syne leading-[0.95] uppercase opacity-20 select-none wrap-break-word">
+          <h2
+            className="font-black tracking-tighter text-white font-syne leading-[0.95] uppercase opacity-20 select-none"
+            style={{ fontSize: "clamp(3rem, 10vw, 11rem)" }}
+          >
             Projets
           </h2>
           {/* Ligne 2 : Premier plan avec effet overlay */}
-          <h2 className="text-[10vw] sm:text-[9vw] md:text-[8vw] lg:text-[11vw] font-black tracking-tighter text-accent font-syne leading-[0.95] uppercase relative -mt-1 sm:-mt-2 md:-mt-4 lg:-mt-8 z-10 mix-blend-overlay wrap-break-word">
+          <h2
+            className="font-black tracking-tighter text-accent font-syne leading-[0.95] uppercase relative z-10 mix-blend-overlay"
+            style={{
+              fontSize: "clamp(3rem, 10vw, 11rem)",
+              marginTop: "clamp(-0.5rem, -1vw, -2rem)",
+            }}
+          >
             Phares
           </h2>
         </div>
