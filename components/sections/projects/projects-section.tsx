@@ -17,6 +17,24 @@ const projects = [
     textColor: "#FFFFFF",
   },
   {
+    title: "Horizon Laby",
+    description:
+      "Plateforme suisse d'automatisation par intelligence artificielle pour les agents immobiliers. Gestion automatisée des emails, assistant téléphonique 24/7 et estimations immobilières intelligentes pour réduire les tâches répétitives et augmenter la productivité.",
+    src: "/horizon-laby.png",
+    link: "https://horizonlaby.com",
+    color: "#0F172A",
+    textColor: "#FFFFFF",
+  },
+  {
+    title: "eNewGen",
+    description:
+      "Entreprise de transformation digitale proposant des services d'ingénierie, de conseil et de sourcing de talents. Automatisation des processus métiers via IA, blockchain et IoT avec un programme de formation innovant en partenariat avec 10.000 Codeurs.",
+    src: "/enewgen.png",
+    link: "https://enewgen.com",
+    color: "#1E3A8A",
+    textColor: "#FFFFFF",
+  },
+  {
     title: "Tokena App",
     description:
       "Plateforme complète de suivi d'investissements en cryptomonnaie avec tableau de bord en temps réel. Développée en Next.js lors du challenge FigmaToCode Edition 2, elle offre une expérience utilisateur moderne pour la gestion de portefeuille crypto.",
@@ -188,7 +206,7 @@ const ProjectsSection = () => {
               {...project}
               url={project.link}
               progress={scrollYProgress}
-              range={[i * 0.25, 1]}
+              range={[i / projects.length, 1]}
               targetScale={targetScale}
             />
           );
