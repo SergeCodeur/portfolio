@@ -1,78 +1,17 @@
 "use client";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/project-card";
 import { motion, useScroll } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import type { ProjectData } from "@/types";
 
-const projects = [
-  {
-    title: "Subvio",
-    description:
-      "Application SaaS de gestion d'abonnements permettant de visualiser, analyser et optimiser tous vos services en un seul endroit. Interface moderne avec tableau de bord intuitif, suivi des dépenses récurrentes et alertes de renouvellement pour une maîtrise totale de vos abonnements.",
-    src: "/subvio.png",
-    link: "https://subvio.sergeamoussougbo.com",
-    color: "#0A0A0B",
-    textColor: "#FFFFFF",
-  },
-  {
-    title: "Horizon Laby",
-    description:
-      "Plateforme suisse d'automatisation par intelligence artificielle pour les agents immobiliers. Gestion automatisée des emails, assistant téléphonique 24/7 et estimations immobilières intelligentes pour réduire les tâches répétitives et augmenter la productivité.",
-    src: "/horizon-laby.png",
-    link: "https://horizonlaby.com",
-    color: "#0F172A",
-    textColor: "#FFFFFF",
-  },
-  {
-    title: "eNewGen",
-    description:
-      "Entreprise de transformation digitale proposant des services d'ingénierie, de conseil et de sourcing de talents. Automatisation des processus métiers via IA, blockchain et IoT avec un programme de formation innovant en partenariat avec 10.000 Codeurs.",
-    src: "/enewgen.png",
-    link: "https://enewgen.com",
-    color: "#1E3A8A",
-    textColor: "#FFFFFF",
-  },
-  {
-    title: "Tokena App",
-    description:
-      "Plateforme complète de suivi d'investissements en cryptomonnaie avec tableau de bord en temps réel. Développée en Next.js lors du challenge FigmaToCode Edition 2, elle offre une expérience utilisateur moderne pour la gestion de portefeuille crypto.",
-    src: "/Tokena.webp",
-    link: "https://tokena.vercel.app",
-    color: "#E8ECF1",
-    textColor: "#1E293B",
-  },
-  {
-    title: "Equinox",
-    description:
-      "Plateforme d'apprentissage innovante alimentée par l'intelligence artificielle. Développée en Next.js, elle révolutionne l'expérience éducative avec des outils d'apprentissage personnalisés et une interface moderne.",
-    src: "/Equinox.webp",
-    link: "https://equinox-drab.vercel.app/",
-    color: "#1A1625",
-    textColor: "#FFFFFF",
-  },
-  {
-    title: "Ballamas",
-    description:
-      "Site web de vente en ligne spécialisé dans la mode contemporaine et les vêtements décontractés. Collection variée avec navigation intuitive et design minimaliste moderne, reflétant une démarche responsable dans la production.",
-    src: "/Site-e-commerce-de-mode-Ballamas.webp",
-    link: "https://figma-to-code-ed2-week2-zeta.vercel.app/",
-    color: "#F5F5F5",
-    textColor: "#050816",
-  },
-  {
-    title: "Doctor",
-    description:
-      "Site web et tableau de bord médical fictif développé en Next.js lors du challenge FigmaToCode. Interface moderne et professionnelle pour la gestion de rendez-vous médicaux, avec un design épuré mettant en avant la confiance et la qualité des soins.",
-    src: "/Doctor.webp",
-    link: "https://doctor-kohl.vercel.app/",
-    color: "#EEF4F8",
-    textColor: "#1E3A5F",
-  },
-];
+interface ProjectsSectionProps {
+  projects: ProjectData[];
+}
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container as React.RefObject<HTMLDivElement>,
@@ -133,7 +72,7 @@ const ProjectsSection = () => {
         <div className="max-w-2xl mx-auto flex flex-col gap-8 sm:gap-10">
           {projects.map((project, i) => (
             <motion.div
-              key={i}
+              key={project.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -183,7 +122,7 @@ const ProjectsSection = () => {
                   <div className="w-full h-full relative">
                     <Image
                       fill
-                      src={project.src}
+                      src={project.imagePath}
                       alt={project.title}
                       className="object-contain"
                     />
@@ -201,10 +140,14 @@ const ProjectsSection = () => {
           const targetScale = 1 - (projects.length - i) * 0.05;
           return (
             <Card
-              key={i}
+              key={project.id}
               i={i}
-              {...project}
+              title={project.title}
+              description={project.description}
+              src={project.imagePath}
               url={project.link}
+              color={project.color}
+              textColor={project.textColor}
               progress={scrollYProgress}
               range={[i / projects.length, 1]}
               targetScale={targetScale}

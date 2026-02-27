@@ -1,74 +1,16 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowRight,
-  Code,
-  FileCheck,
-  Palette,
-  Phone,
-  Rocket,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { getIcon } from "@/lib/icons";
+import type { ProcessStepData } from "@/types";
 
-interface Step {
-  number: number;
-  icon: React.ElementType;
-  title: string;
-  duration: string;
-  detail?: string;
-  description: string;
+interface ProcessSectionProps {
+  steps: ProcessStepData[];
 }
 
-const steps: Step[] = [
-  {
-    number: 1,
-    icon: Phone,
-    title: "Découverte",
-    duration: "30 min",
-    detail: "Gratuit",
-    description:
-      "On clarifie votre vision ensemble. Vous repartez avec une roadmap claire et un premier devis estimatif.",
-  },
-  {
-    number: 2,
-    icon: FileCheck,
-    title: "Proposition",
-    duration: "48h max",
-    detail: "Devis fixe",
-    description:
-      "Proposition détaillée avec prix ferme, timeline précise et stack technique. Aucune surprise sur le budget.",
-  },
-  {
-    number: 3,
-    icon: Palette,
-    title: "Design",
-    duration: "1-2 semaines",
-    detail: "Figma + Révisions",
-    description:
-      "Des prototypes haute-fidélité pour visualiser le résultat final. Vous validez chaque écran et chaque interaction avant le développement.",
-  },
-  {
-    number: 4,
-    icon: Code,
-    title: "Développement",
-    duration: "4-12 semaines",
-    detail: "Updates hebdo",
-    description:
-      "Code moderne et documenté. Vous suivez l'avancement en temps réel via des démos hebdomadaires.",
-  },
-  {
-    number: 5,
-    icon: Rocket,
-    title: "Lancement",
-    duration: "1 journée",
-    detail: "Accompagnement",
-    description:
-      "Déploiement production, documentation complète et vidéos tutoriels. Vous êtes 100% autonome dès le jour 1.",
-  },
-];
-
-const ProcessSection = () => {
+const ProcessSection = ({ steps }: ProcessSectionProps) => {
   const [active, setActive] = useState(0);
   const totalSteps = steps.length;
 
@@ -81,6 +23,8 @@ const ProcessSection = () => {
   const baseRotation = -90;
   const stepAngle = 360 / totalSteps;
   const rotation = baseRotation - active * stepAngle;
+
+  if (steps.length === 0) return null;
 
   return (
     <section
@@ -117,7 +61,7 @@ const ProcessSection = () => {
           {/* --- ORBITAL SYSTEM --- */}
           <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[375px] md:h-[375px] lg:w-[500px] lg:h-[500px] shrink-0">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] scale-[0.5] sm:scale-[0.6] md:scale-[0.75] lg:scale-100 transition-transform duration-500 origin-center">
-              {/* Anneau décoratif principal (Correspond au rayon des items) */}
+              {/* Anneau décoratif principal */}
               <div className="absolute inset-0 rounded-full border border-white/5" />
 
               {/* Anneau intérieur pointillé */}
@@ -137,16 +81,19 @@ const ProcessSection = () => {
                 {steps.map((step, index) => {
                   const angle = index * stepAngle;
                   const finalAngle = angle + rotation;
-                  const x = Math.cos((finalAngle * Math.PI) / 180) * radius;
-                  const y = Math.sin((finalAngle * Math.PI) / 180) * radius;
+                  const xPos =
+                    Math.cos((finalAngle * Math.PI) / 180) * radius;
+                  const yPos =
+                    Math.sin((finalAngle * Math.PI) / 180) * radius;
+                  const StepIcon = getIcon(step.icon);
 
                   return (
                     <motion.div
-                      key={step.number}
+                      key={step.id}
                       className="absolute top-1/2 left-1/2 w-24 h-24 -ml-12 -mt-12 flex items-center justify-center rounded-full cursor-pointer"
                       animate={{
-                        x: x,
-                        y: y,
+                        x: xPos,
+                        y: yPos,
                         rotate: -rotation,
                       }}
                       transition={{
@@ -165,7 +112,7 @@ const ProcessSection = () => {
                             : "border-white/10 hover:border-white/30 hover:bg-white/5"
                         }`}
                       >
-                        <step.icon
+                        <StepIcon
                           className={`w-8 h-8 transition-colors duration-300 ${
                             active === index ? "text-accent" : "text-gray-500"
                           }`}
@@ -181,7 +128,7 @@ const ProcessSection = () => {
                 })}
               </motion.div>
 
-              {/* CENTER CORE (Titre de la phase active) */}
+              {/* CENTER CORE */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <AnimatePresence mode="wait">
                   <motion.div

@@ -1,98 +1,92 @@
-"use client";
-import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRef } from "react";
+import * as React from "react"
 
-interface CardProps {
-  i: number;
-  title: string;
-  description: string;
-  src: string;
-  url: string;
-  color: string;
-  progress: MotionValue<number>;
-  range: number[];
-  targetScale: number;
-  textColor?: string;
-}
+import { cn } from "@/lib/utils"
 
-export const Card = ({
-  i,
-  title,
-  description,
-  src,
-  url,
-  color,
-  progress,
-  range,
-  targetScale,
-  textColor = "#050816",
-}: CardProps) => {
-  const container = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: container as React.RefObject<HTMLDivElement>,
-    offset: ["start end", "start start"],
-  });
-
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
-
-  const scale = useTransform(progress, range, [1, targetScale]);
-
+function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      ref={container}
-      className="h-screen flex items-center justify-center sticky top-0"
-    >
-      <motion.div
-        style={{
-          backgroundColor: color,
-          scale,
-          top: `calc(-5vh + ${i * 25}px)`,
-        }}
-        className="flex flex-col relative -top-[25%] h-[450px] sm:h-[480px] md:h-[500px] w-[95%] sm:w-[90%] md:w-[1200px] rounded-[20px] sm:rounded-[25px] md:rounded-[30px] p-6 sm:p-8 md:p-12 origin-top border border-white/10 shadow-2xl overflow-hidden"
-      >
-        <div className="flex h-full gap-6 sm:gap-8 md:gap-10 flex-col md:flex-row">
-          {/* Contenu Texte */}
-          <div className="w-full md:w-[35%] relative z-10 flex flex-col justify-between">
-            <div>
-              <h2
-                style={{ color: textColor }}
-                className="text-2xl sm:text-3xl md:text-5xl font-bold font-syne mb-3 sm:mb-4 leading-tight"
-              >
-                {title}
-              </h2>
-              <p
-                style={{ color: textColor }}
-                className="text-sm sm:text-base md:text-lg font-sans leading-relaxed opacity-70"
-              >
-                {description}
-              </p>
-            </div>
+      data-slot="card"
+      className={cn(
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        className
+      )}
+      {...props}
+    />
+  )
+}
 
-            <div className="flex items-center gap-4 mt-4 sm:mt-6 md:mt-0">
-              <Link
-                href={url}
-                style={{ color: textColor, borderColor: textColor }}
-                className="flex items-center gap-2 font-bold uppercase tracking-widest text-xs sm:text-sm border-b pb-1 cursor-pointer hover:opacity-70 transition-opacity"
-              >
-                Voir le projet
-                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              </Link>
-            </div>
-          </div>
+function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-header"
+      className={cn(
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        className
+      )}
+      {...props}
+    />
+  )
+}
 
-          <div className="relative w-full md:w-[65%] h-[200px] sm:h-[250px] md:h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-inner">
-            <motion.div
-              style={{ scale: imageScale }}
-              className="w-full h-full relative"
-            >
-              <Image fill src={src} alt={title} className="object-contain" />
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
+function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-title"
+      className={cn("leading-none font-semibold", className)}
+      {...props}
+    />
+  )
+}
+
+function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-description"
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  )
+}
+
+function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-action"
+      className={cn(
+        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-content"
+      className={cn("px-6", className)}
+      {...props}
+    />
+  )
+}
+
+function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-footer"
+      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      {...props}
+    />
+  )
+}
+
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+}

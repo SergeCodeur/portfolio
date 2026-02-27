@@ -2,43 +2,20 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
+import type { TestimonialData } from "@/types";
 
-const TestimonialsSection = () => {
+interface TestimonialsSectionProps {
+  testimonials: TestimonialData[];
+}
+
+const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
   const [active, setActive] = useState(0);
-  const testimonials = [
-    {
-      id: 1,
-      quote:
-        "Notre site e-commerce Next.js a augmenté nos ventes de 40% en 3 mois. Code propre et facile à maintenir.",
-      name: "Sophie Mensah",
-      role: "Fondatrice, E-commerce Plus",
-    },
-    {
-      id: 2,
-      quote:
-        "L'automatisation n8n connecte maintenant notre CRM, emailing et comptabilité. On gagne 25h/semaine et les erreurs manuelles ont disparu.",
-      name: "Jean-Baptiste Adou",
-      role: "CEO, Tech Solutions Bénin",
-    },
-    {
-      id: 3,
-      quote:
-        "Le dashboard avec Shopify et Stripe nous permet de prendre des décisions éclairées. Interface intuitive et données à jour.",
-      name: "Marie Kouassi",
-      role: "Directrice Marketing, Digital Boost",
-    },
-    {
-      id: 4,
-      quote:
-        "Application SaaS livrée en 8 semaines avec toutes les fonctionnalités. Équipe ravie, très professionnel.",
-      name: "David Koffi",
-      role: "CTO, StartupLab",
-    },
-  ];
 
   const next = () => setActive((prev) => (prev + 1) % testimonials.length);
   const prev = () =>
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+
+  if (testimonials.length === 0) return null;
 
   return (
     <section

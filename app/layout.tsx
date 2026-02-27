@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "@/components/ui/sonner";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 
@@ -55,6 +56,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning={true} className="dark">
       <body className={`${inter.variable} ${syne.variable} antialiased`}>
         {children}
+        <Toaster richColors position="top-right" />
         <Analytics />
       </body>
     </html>

@@ -1,39 +1,16 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import type { ExpertiseCategoryData } from "@/types";
 
-const techStack = [
-  {
-    category: "Frontend",
-    description: "Interfaces modernes, performantes et accessibles",
-    items: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind",
-      "Framer Motion",
-      "Three.js",
-    ],
-  },
-  {
-    category: "Backend",
-    description: "APIs REST/GraphQL, bases de données relationnelles et NoSQL",
-    items: ["Node.js", "Express", "PostgreSQL", "Supabase", "Python", "Prisma"],
-  },
-  {
-    category: "Automatisation",
-    description: "Automatisation de workflows et intégrations API",
-    items: ["n8n", "Make", "Zapier", "Webhooks"],
-  },
-  {
-    category: "DevOps",
-    description: "Déploiement, conteneurisation et infrastructure cloud",
-    items: ["Vercel", "Docker", "GitHub Actions", "AWS"],
-  },
-];
+interface ExpertiseEditorialProps {
+  categories: ExpertiseCategoryData[];
+}
 
-const ExpertiseEditorial = () => {
+const ExpertiseEditorial = ({ categories }: ExpertiseEditorialProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+
+  if (categories.length === 0) return null;
 
   return (
     <section
@@ -46,9 +23,9 @@ const ExpertiseEditorial = () => {
         </h2>
 
         <div className="flex flex-col">
-          {techStack.map((stack, index) => (
+          {categories.map((stack, index) => (
             <motion.div
-              key={index}
+              key={stack.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}

@@ -1,49 +1,15 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { BarChart3, CheckCircle2, Code, LucideIcon, Zap } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useRef } from "react";
+import { getIcon } from "@/lib/icons";
+import type { ServiceData } from "@/types";
 
-interface ServiceItem {
-  title: string;
-  subtitle: string;
-  desc: string;
-  deliverables: string;
-  icon: LucideIcon;
-  color: string;
-  examples: string[];
+interface ServicesSectionProps {
+  services: ServiceData[];
 }
 
-const services: ServiceItem[] = [
-  {
-    title: "Applications Web Sur Mesure",
-    subtitle: "Sites & Apps qui convertissent",
-    desc: "Du site vitrine au SaaS complexe. React, Next.js, design moderne et performance optimale. Code propre, documenté et scalable.",
-    deliverables: "Design • Dev • Déploiement",
-    icon: Code,
-    color: "bg-blue-500",
-    examples: ["E-commerce", "SaaS", "Landing Pages"],
-  },
-  {
-    title: "Automatisation Intelligente",
-    subtitle: "Gagnez 10h/semaine",
-    desc: "Connectez vos outils avec n8n, Make ou Zapier. Workflows automatiques pour emails, CRM, reporting et bien plus.",
-    deliverables: "Audit • Config • Tests • Documentation",
-    icon: Zap,
-    color: "bg-yellow-400",
-    examples: ["n8n Workflows", "API Sync", "Webhooks"],
-  },
-  {
-    title: "Dashboards Analytiques",
-    subtitle: "Visualisez, décidez, agissez",
-    desc: "Tableaux de bord temps réel pour piloter votre business. Connectés à vos outils (Shopify, Stripe, CRM, Analytics).",
-    deliverables: "Design • Intégrations • Rapports • Updates",
-    icon: BarChart3,
-    color: "bg-purple-500",
-    examples: ["KPIs", "Reporting", "Metrics"],
-  },
-];
-
-const ServicesSection = () => {
+const ServicesSection = ({ services }: ServicesSectionProps) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef as React.RefObject<HTMLDivElement>,
@@ -51,8 +17,8 @@ const ServicesSection = () => {
 
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
 
-  const ServiceCard = ({ service }: { service: ServiceItem }) => {
-    const Icon = service.icon;
+  const ServiceCard = ({ service }: { service: ServiceData }) => {
+    const Icon = getIcon(service.icon);
     return (
       <div className="group relative h-full bg-[#f5f5f7] rounded-3xl p-6 sm:p-7 laptop:p-8 laptop-lg:p-8 flex flex-col border border-gray-200 overflow-hidden">
         {/* Contenu principal (Z-Index élevé) */}
@@ -76,7 +42,7 @@ const ServicesSection = () => {
 
           {/* Body: Description */}
           <p className="text-sm sm:text-sm laptop:text-base laptop-lg:text-base text-gray-600 leading-relaxed font-sans mb-6 laptop:mb-7 laptop-lg:mb-8">
-            {service.desc}
+            {service.description}
           </p>
 
           {/* Footer: Details & Tags */}
@@ -131,7 +97,7 @@ const ServicesSection = () => {
           <div className="flex flex-col gap-6">
             {services.map((service, i) => (
               <motion.div
-                key={i}
+                key={service.id}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -167,7 +133,7 @@ const ServicesSection = () => {
             {/* Service Cards (Horizontal) */}
             {services.map((service, i) => (
               <div
-                key={i}
+                key={service.id}
                 className="h-[60vh] sm:h-[68vh] laptop:h-[72vh] laptop-lg:h-[70vh] w-[80vw] sm:w-[45vw] lg:w-[38vw] laptop:w-[36vw] laptop-lg:w-[35vw] shrink-0"
               >
                 <ServiceCard service={service} />

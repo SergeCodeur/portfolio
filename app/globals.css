@@ -22,6 +22,8 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-destructive: var(--destructive);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --radius-sm: calc(var(--radius) - 4px);
@@ -55,6 +57,8 @@
   --muted: rgba(255, 255, 255, 0.05);
   --muted-foreground: var(--foreground-70);
   --destructive: #ef4444;
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
   --ring: var(--accent);
   --input: var(--border);
 }
@@ -78,6 +82,8 @@
   --muted: rgba(255, 255, 255, 0.05);
   --muted-foreground: var(--foreground-70);
   --destructive: #ef4444;
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
   --ring: var(--accent);
   --input: var(--border);
 }
