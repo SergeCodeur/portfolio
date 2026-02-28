@@ -1,5 +1,9 @@
 "use client";
 
+import { useRef } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+
 interface ColorPickerProps {
   value: string;
   onChange: (value: string) => void;
@@ -7,46 +11,51 @@ interface ColorPickerProps {
 }
 
 const presetColors = [
-  "#050816", "#0A0A0B", "#0F172A", "#1A1625", "#1E3A8A",
-  "#E8ECF1", "#EEF4F8", "#F5F5F5", "#FFFFFF",
+  "#050816", "#0A0A0B", "#0F172A", "#1E3A8A",
+  "#E8ECF1", "#F5F5F5", "#FFFFFF",
   "#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6", "#8b5cf6",
 ];
 
 export default function ColorPicker({ value, onChange, label }: ColorPickerProps) {
+  const colorInputRef = useRef<HTMLInputElement>(null);
+
   return (
-    <div className="space-y-2">
-      {label && (
-        <span className="text-sm font-medium text-foreground">{label}</span>
-      )}
-      <div className="flex items-center gap-3">
-        <div
-          className="w-10 h-10 rounded-lg border border-border shrink-0"
+    <div className="space-y-3">
+      {label && <Label>{label}</Label>}
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => colorInputRef.current?.click()}
+          className="w-9 h-9 rounded-lg border border-border shrink-0 cursor-pointer transition-transform hover:scale-105"
           style={{ backgroundColor: value }}
-        />
-        <input
+          title="Choisir une couleur"
+        >
+          <input
+            ref={colorInputRef}
+            type="color"
+            value={value.startsWith("#") ? value : "#000000"}
+            onChange={(e) => onChange(e.target.value)}
+            className="sr-only"
+          />
+        </button>
+        <Input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="#000000"
-          className="flex-1 px-3 py-2 rounded-lg bg-background border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-        />
-        <input
-          type="color"
-          value={value.startsWith("#") ? value : "#000000"}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-10 h-10 rounded-lg border border-border cursor-pointer bg-transparent"
+          className="font-mono text-xs"
         />
       </div>
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-wrap gap-1">
         {presetColors.map((color) => (
           <button
             key={color}
             type="button"
             onClick={() => onChange(color)}
-            className={`w-6 h-6 rounded-md border transition-transform ${
+            className={`w-5 h-5 rounded-md border transition-transform ${
               value === color
-                ? "border-accent scale-110"
-                : "border-border hover:scale-110"
+                ? "border-accent scale-110 ring-1 ring-accent"
+                : "border-border/50 hover:scale-110"
             }`}
             style={{ backgroundColor: color }}
             title={color}

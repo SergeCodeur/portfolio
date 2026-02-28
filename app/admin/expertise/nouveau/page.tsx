@@ -4,15 +4,23 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ArrayInput from "@/components/admin/array-input";
+import AdminPageHeader from "@/components/admin/page-header";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+
+const defaultForm = {
+  category: "",
+  description: "",
+  items: [] as string[],
+};
 
 export default function NewExpertisePage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
-  const [form, setForm] = useState({
-    category: "",
-    description: "",
-    items: [] as string[],
-  });
+  const [form, setForm] = useState(defaultForm);
+  const hasChanges = JSON.stringify(form) !== JSON.stringify(defaultForm);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -34,67 +42,58 @@ export default function NewExpertisePage() {
   }
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold font-heading text-foreground mb-6">
-        Nouvelle catégorie d&apos;expertise
-      </h1>
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Catégorie
-          </label>
-          <input
-            type="text"
-            value={form.category}
-            onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-            placeholder="Frontend"
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Description
-          </label>
-          <input
-            type="text"
-            value={form.description}
-            onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Technologies / Outils
-          </label>
-          <ArrayInput
-            value={form.items}
-            onChange={(items) => setForm({ ...form, items })}
-            placeholder="Ajouter une technologie..."
-          />
-        </div>
-
-        <div className="flex gap-3 pt-4">
-          <button
-            type="submit"
-            disabled={saving}
-            className="px-6 py-3 rounded-lg bg-accent text-background font-medium hover:bg-accent/90 transition-colors disabled:opacity-50"
-          >
+    <div>
+      <AdminPageHeader
+        title="Nouvelle catégorie d'expertise"
+        action={
+          <Button type="submit" form="new-expertise-form" disabled={saving || !hasChanges}>
             {saving ? "Création..." : "Créer la catégorie"}
-          </button>
-          <button
-            type="button"
-            onClick={() => router.back()}
-            className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-muted transition-colors"
-          >
-            Annuler
-          </button>
+          </Button>
+        }
+      />
+
+      <div className="rounded-xl border border-border p-6">
+        <div className="mb-6">
+          <h2 className="font-semibold">Informations de la catégorie</h2>
+          <p className="text-sm text-muted-foreground mt-1">Remplissez les détails de la nouvelle catégorie.</p>
         </div>
-      </form>
+        <form id="new-expertise-form" onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="category">Catégorie</Label>
+              <Input
+                id="category"
+                type="text"
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+                placeholder="Frontend"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="description">Description</Label>
+              <Input
+                id="description"
+                type="text"
+                value={form.description}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                required
+              />
+            </div>
+
+            <Separator />
+
+            <div className="space-y-2">
+              <Label>Technologies / Outils</Label>
+              <ArrayInput
+                value={form.items}
+                onChange={(items) => setForm({ ...form, items })}
+                placeholder="Ajouter une technologie..."
+              />
+            </div>
+
+          </form>
+      </div>
     </div>
   );
 }

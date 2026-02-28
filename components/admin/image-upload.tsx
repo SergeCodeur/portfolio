@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Upload, Link as LinkIcon, X } from "lucide-react";
+import { UploadIcon, LinkIcon, XIcon } from "@phosphor-icons/react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface ImageUploadProps {
   value: string;
@@ -54,71 +56,58 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
   return (
     <div className="space-y-3">
       <div className="flex gap-2">
-        <button
+        <Button
           type="button"
+          variant={mode === "file" ? "secondary" : "ghost"}
+          size="sm"
           onClick={() => setMode("file")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-            mode === "file"
-              ? "bg-accent/10 text-accent"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
         >
-          <Upload className="w-3.5 h-3.5" />
+          <UploadIcon className="w-3.5 h-3.5" />
           Fichier
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant={mode === "url" ? "secondary" : "ghost"}
+          size="sm"
           onClick={() => setMode("url")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-            mode === "url"
-              ? "bg-accent/10 text-accent"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
         >
           <LinkIcon className="w-3.5 h-3.5" />
           URL
-        </button>
+        </Button>
       </div>
 
       {mode === "file" ? (
-        <div>
-          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-accent/50 transition-colors">
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <Upload className="w-8 h-8 mb-2 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground">
-                {uploading
-                  ? "Upload en cours..."
-                  : "Cliquez pour sélectionner"}
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                JPEG, PNG, WebP, AVIF (max 5Mo)
-              </p>
-            </div>
-            <input
-              type="file"
-              className="hidden"
-              accept="image/jpeg,image/png,image/webp,image/avif"
-              onChange={handleFileChange}
-              disabled={uploading}
-            />
-          </label>
-        </div>
+        <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-accent/50 transition-colors">
+          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            <UploadIcon className="w-8 h-8 mb-2 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">
+              {uploading
+                ? "Upload en cours..."
+                : "Cliquez pour sélectionner"}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              JPEG, PNG, WebP, AVIF (max 5Mo)
+            </p>
+          </div>
+          <input
+            type="file"
+            className="hidden"
+            accept="image/jpeg,image/png,image/webp,image/avif"
+            onChange={handleFileChange}
+            disabled={uploading}
+          />
+        </label>
       ) : (
         <div className="flex gap-2">
-          <input
+          <Input
             type="url"
             value={urlInput}
             onChange={(e) => setUrlInput(e.target.value)}
             placeholder="https://example.com/image.jpg"
-            className="flex-1 px-3 py-2 rounded-lg bg-background border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
           />
-          <button
-            type="button"
-            onClick={handleUrlSubmit}
-            className="px-4 py-2 rounded-lg bg-accent text-background text-sm font-medium hover:bg-accent/90 transition-colors"
-          >
+          <Button type="button" size="sm" onClick={handleUrlSubmit}>
             OK
-          </button>
+          </Button>
         </div>
       )}
 
@@ -132,16 +121,18 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
               className="object-cover"
             />
           </div>
-          <button
+          <Button
             type="button"
+            variant="destructive"
+            size="icon-xs"
             onClick={() => {
               onChange("");
               setUrlInput("");
             }}
-            className="absolute -top-2 -right-2 w-5 h-5 bg-destructive text-white rounded-full flex items-center justify-center"
+            className="absolute -top-2 -right-2 rounded-full"
           >
-            <X className="w-3 h-3" />
-          </button>
+            <XIcon className="w-3 h-3" />
+          </Button>
         </div>
       )}
     </div>

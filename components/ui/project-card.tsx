@@ -1,6 +1,6 @@
 "use client";
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -78,7 +78,7 @@ export const Card = ({
                 className="flex items-center gap-2 font-bold uppercase tracking-widest text-xs sm:text-sm border-b pb-1 cursor-pointer hover:opacity-70 transition-opacity"
               >
                 Voir le projet
-                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                <ArrowUpRightIcon className="w-3 h-3 sm:w-4 sm:h-4" />
               </Link>
             </div>
           </div>

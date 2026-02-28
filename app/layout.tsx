@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { PostHogProvider } from "@/components/posthog-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
@@ -55,7 +56,9 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning={true} className="dark">
       <body className={`${inter.variable} ${syne.variable} antialiased`}>
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
         <Toaster richColors position="top-right" />
         <Analytics />
       </body>

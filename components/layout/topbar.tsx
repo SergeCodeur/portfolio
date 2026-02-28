@@ -1,7 +1,7 @@
 "use client";
 import { handleScroll, navLinks } from "@/constants/navlinks";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ListIcon, XIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -62,7 +62,7 @@ const TopbarMagnetic = () => {
           aria-label="Ouvrir le menu"
           className="lg:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-accent flex items-center justify-center text-black shrink-0"
         >
-          <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
+          <ListIcon className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </motion.nav>
 
@@ -87,7 +87,7 @@ const TopbarMagnetic = () => {
                 aria-label="Fermer le menu"
                 className="p-2 bg-white/10 rounded-full text-white"
               >
-                <X className="w-6 h-6 sm:w-8 sm:h-8" />
+                <XIcon className="w-6 h-6 sm:w-8 sm:h-8" />
               </button>
             </div>
             <div className="flex flex-col gap-4 sm:gap-6">

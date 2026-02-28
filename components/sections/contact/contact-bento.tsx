@@ -1,7 +1,7 @@
 "use client";
 import { GitHub, LinkedIn, XformerlyTwitter } from "@/components/icons";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Calendar, Mail } from "lucide-react";
+import { ArrowUpRightIcon, CalendarBlankIcon, EnvelopeIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 
 const ContactBento = () => {
@@ -34,7 +34,7 @@ const ContactBento = () => {
           >
             <div>
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ffd966] flex items-center justify-center mb-4 sm:mb-6">
-                <Mail className="text-[#0a1628] w-5 h-5 sm:w-6 sm:h-6" />
+                <EnvelopeIcon className="text-[#0a1628] w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white font-syne mb-2 sm:mb-3">
                 Lancer un projet
@@ -93,7 +93,7 @@ const ContactBento = () => {
                       {social.name}
                     </span>
                   </div>
-                  <ArrowUpRight
+                  <ArrowUpRightIcon
                     size={20}
                     className="text-gray-600 group-hover:text-primary group-hover:rotate-45 transition-all"
                   />
@@ -116,12 +116,12 @@ const ContactBento = () => {
               >
                 <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
                   <div className="flex items-center gap-2">
-                    <Calendar size={18} className="sm:w-5 sm:h-5" />
+                    <CalendarBlankIcon size={18} className="sm:w-5 sm:h-5" />
                     <span className="font-bold uppercase tracking-wide text-xs sm:text-sm">
                       Appel Gratuit
                     </span>
                   </div>
-                  <ArrowUpRight
+                  <ArrowUpRightIcon
                     size={24}
                     className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
                   />

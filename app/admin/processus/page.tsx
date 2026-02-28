@@ -2,10 +2,33 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Pencil, Trash2, Eye, EyeOff, ArrowUpDown } from "lucide-react";
+import { PlusIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import { getIcon } from "@/lib/icons";
 import type { ProcessStepData } from "@/types";
+import AdminPageHeader from "@/components/admin/page-header";
+import { SortableTable, SortableTableBody } from "@/components/admin/sortable-table";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Switch } from "@/components/ui/switch";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function ProcessPage() {
   const [steps, setSteps] = useState<ProcessStepData[]>([]);
@@ -33,18 +56,12 @@ export default function ProcessPage() {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("Supprimer cette étape ?")) return;
     await fetch(`/api/process-steps/${id}`, { method: "DELETE" });
     setSteps((prev) => prev.filter((s) => s.id !== id));
     toast.success("Étape supprimée");
   }
 
-  async function moveItem(index: number, direction: "up" | "down") {
-    const newIndex = direction === "up" ? index - 1 : index + 1;
-    if (newIndex < 0 || newIndex >= steps.length) return;
-    const updated = [...steps];
-    [updated[index], updated[newIndex]] = [updated[newIndex], updated[index]];
-    const reordered = updated.map((item, i) => ({ ...item, order: i }));
+  async function handleReorder(reordered: ProcessStepData[]) {
     setSteps(reordered);
     await fetch("/api/process-steps/reorder", {
       method: "PUT",
@@ -57,93 +74,122 @@ export default function ProcessPage() {
 
   if (loading) {
     return (
-      <div className="space-y-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="h-20 rounded-lg bg-surface animate-pulse" />
-        ))}
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <Skeleton className="h-8 w-36" />
+            <Skeleton className="h-4 w-20 mt-2" />
+          </div>
+          <Skeleton className="h-9 w-36" />
+        </div>
+        <div className="rounded-xl border border-border overflow-hidden">
+            <div className="divide-y divide-border">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="flex items-center gap-4 px-4 py-3">
+                  <Skeleton className="h-5 w-8" />
+                  <Skeleton className="h-7 w-7 rounded-full" />
+                  <Skeleton className="h-4 w-40" />
+                  <Skeleton className="h-4 w-24 hidden md:block" />
+                  <Skeleton className="h-5 w-10 ml-auto" />
+                  <Skeleton className="h-8 w-16" />
+                </div>
+              ))}
+            </div>
+        </div>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold font-heading text-foreground">
-            Processus
-          </h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            {steps.length} étape{steps.length > 1 ? "s" : ""}
-          </p>
+      <AdminPageHeader
+        title="Processus"
+        description={`${steps.length} étape${steps.length > 1 ? "s" : ""}`}
+        action={
+          <Button asChild>
+            <Link href="/admin/processus/nouveau">
+              <PlusIcon className="w-4 h-4" />
+              Nouvelle étape
+            </Link>
+          </Button>
+        }
+      />
+
+      <SortableTable items={steps} onReorder={handleReorder}>
+        <div className="rounded-xl border border-border overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-10" />
+                <TableHead className="w-12">#</TableHead>
+                <TableHead>Titre</TableHead>
+                <TableHead className="hidden md:table-cell">Durée</TableHead>
+                <TableHead className="w-24">Visibilité</TableHead>
+                <TableHead className="w-28 text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <SortableTableBody items={steps}>
+              {(step) => {
+                const Icon = getIcon(step.icon);
+                return (
+                  <>
+                    <TableCell>
+                      <div className="w-7 h-7 rounded-full bg-accent/10 flex items-center justify-center">
+                        <span className="text-xs font-bold text-accent">{step.number}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-medium">{step.title}</TableCell>
+                    <TableCell className="hidden md:table-cell text-muted-foreground">
+                      {step.duration}
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={step.visible}
+                        onCheckedChange={() =>
+                          toggleVisibility(step.id, step.visible)
+                        }
+                      />
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        <Button variant="ghost" size="icon-xs" asChild>
+                          <Link href={`/admin/processus/${step.id}`}>
+                            <PencilSimpleIcon className="w-4 h-4" />
+                          </Link>
+                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="ghost" size="icon-xs" className="text-muted-foreground hover:text-destructive">
+                              <TrashIcon className="w-4 h-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Supprimer cette étape ?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Cette action est irréversible. L&apos;étape sera définitivement supprimée.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Annuler</AlertDialogCancel>
+                              <AlertDialogAction
+                                variant="destructive"
+                                onClick={() => handleDelete(step.id)}
+                              >
+                                Supprimer
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    </TableCell>
+                  </>
+                );
+              }}
+            </SortableTableBody>
+          </Table>
         </div>
-        <Link
-          href="/admin/processus/nouveau"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-background font-medium text-sm hover:bg-accent/90 transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-          Nouvelle étape
-        </Link>
-      </div>
-
-      <div className="space-y-3">
-        {steps.map((step, index) => {
-          const Icon = getIcon(step.icon);
-          return (
-            <div
-              key={step.id}
-              className="glass rounded-xl p-4 flex items-center gap-4"
-            >
-              <div className="flex flex-col gap-1">
-                <button
-                  onClick={() => moveItem(index, "up")}
-                  disabled={index === 0}
-                  className="text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors"
-                >
-                  <ArrowUpDown className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                <Icon className="w-5 h-5 text-accent" />
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-foreground truncate">
-                  {step.number}. {step.title}
-                </h3>
-                <p className="text-xs text-muted-foreground truncate">
-                  {step.duration} {step.detail && `- ${step.detail}`}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={() => toggleVisibility(step.id, step.visible)}
-                  className={`p-2 rounded-lg transition-colors ${
-                    step.visible
-                      ? "text-accent hover:bg-accent/10"
-                      : "text-muted-foreground hover:bg-muted"
-                  }`}
-                >
-                  {step.visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                </button>
-                <Link
-                  href={`/admin/processus/${step.id}`}
-                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  <Pencil className="w-4 h-4" />
-                </Link>
-                <button
-                  onClick={() => handleDelete(step.id)}
-                  className="p-2 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      </SortableTable>
     </div>
   );
 }

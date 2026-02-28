@@ -1,27 +1,30 @@
-import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
+import type { Icon } from "@phosphor-icons/react";
 
 interface StatCardProps {
   title: string;
   value: number;
-  icon: LucideIcon;
+  icon: Icon;
   href: string;
 }
 
-export default function StatCard({ title, value, icon: Icon, href }: StatCardProps) {
+export default function StatCard({
+  title,
+  value,
+  icon: IconComp,
+  href,
+}: StatCardProps) {
   return (
-    <a
-      href={href}
-      className="glass rounded-xl p-6 hover:bg-surface/80 transition-colors group"
-    >
-      <div className="flex items-center justify-between mb-4">
-        <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-          <Icon className="w-5 h-5 text-accent" />
+    <Link href={href} className="group block">
+      <div className="rounded-xl border border-border bg-card p-5 transition-colors hover:bg-white/3">
+        <div className="flex items-start justify-between">
+          <p className="text-sm text-muted-foreground">{title}</p>
+          <IconComp className="w-5 h-5 text-muted-foreground" />
         </div>
-        <span className="text-3xl font-bold text-foreground font-heading">
+        <span className="block text-3xl font-bold font-heading mt-3">
           {value}
         </span>
       </div>
-      <p className="text-sm text-muted-foreground">{title}</p>
-    </a>
+    </Link>
   );
 }

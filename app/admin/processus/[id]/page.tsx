@@ -4,6 +4,13 @@ import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import IconPicker from "@/components/admin/icon-picker";
+import AdminPageHeader from "@/components/admin/page-header";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function EditProcessStepPage({
   params,
@@ -22,19 +29,23 @@ export default function EditProcessStepPage({
     detail: "",
     description: "",
   });
+  const [initialForm, setInitialForm] = useState<typeof form | null>(null);
+  const hasChanges = initialForm !== null && JSON.stringify(form) !== JSON.stringify(initialForm);
 
   useEffect(() => {
     fetch(`/api/process-steps/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setForm({
+        const loaded = {
           number: data.number,
           icon: data.icon,
           title: data.title,
           duration: data.duration,
           detail: data.detail || "",
           description: data.description,
-        });
+        };
+        setForm(loaded);
+        setInitialForm(loaded);
         setLoading(false);
       });
   }, [id]);
@@ -63,106 +74,104 @@ export default function EditProcessStepPage({
 
   if (loading) {
     return (
-      <div className="max-w-2xl space-y-4">
-        {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-12 rounded-lg bg-surface animate-pulse" />
-        ))}
+      <div className="space-y-6">
+        <Skeleton className="h-8 w-48" />
+        <div className="rounded-xl border border-border p-6 space-y-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} className="h-10 w-full" />
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold font-heading text-foreground mb-6">
-        Modifier l&apos;étape
-      </h1>
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Numéro</label>
-            <input
-              type="number"
-              value={form.number}
-              onChange={(e) =>
-                setForm({ ...form, number: parseInt(e.target.value) || 1 })
-              }
-              className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              min={1}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Durée</label>
-            <input
-              type="text"
-              value={form.duration}
-              onChange={(e) => setForm({ ...form, duration: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">Titre</label>
-          <input
-            type="text"
-            value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Détail (optionnel)
-          </label>
-          <input
-            type="text"
-            value={form.detail}
-            onChange={(e) => setForm({ ...form, detail: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">Icône</label>
-          <IconPicker
-            value={form.icon}
-            onChange={(icon) => setForm({ ...form, icon })}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">Description</label>
-          <textarea
-            value={form.description}
-            onChange={(e) => setForm({ ...form, description: e.target.value })}
-            rows={4}
-            className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent resize-none"
-            required
-          />
-        </div>
-
-        <div className="flex gap-3 pt-4">
-          <button
-            type="submit"
-            disabled={saving}
-            className="px-6 py-3 rounded-lg bg-accent text-background font-medium hover:bg-accent/90 transition-colors disabled:opacity-50"
-          >
+    <div>
+      <AdminPageHeader
+        title="Modifier l'étape"
+        action={
+          <Button type="submit" form="edit-process-form" disabled={saving || !hasChanges}>
             {saving ? "Sauvegarde..." : "Sauvegarder"}
-          </button>
-          <button
-            type="button"
-            onClick={() => router.back()}
-            className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-muted transition-colors"
-          >
-            Annuler
-          </button>
+          </Button>
+        }
+      />
+
+      <div className="rounded-xl border border-border p-6">
+        <div className="mb-6">
+          <h2 className="font-semibold">Informations de l&apos;étape</h2>
+          <p className="text-sm text-muted-foreground mt-1">Modifiez les détails de l&apos;étape.</p>
         </div>
-      </form>
+        <form id="edit-process-form" onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="number">Numéro</Label>
+                <Input
+                  id="number"
+                  type="number"
+                  value={form.number}
+                  onChange={(e) =>
+                    setForm({ ...form, number: parseInt(e.target.value) || 1 })
+                  }
+                  min={1}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="duration">Durée</Label>
+                <Input
+                  id="duration"
+                  type="text"
+                  value={form.duration}
+                  onChange={(e) => setForm({ ...form, duration: e.target.value })}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="title">Titre</Label>
+              <Input
+                id="title"
+                type="text"
+                value={form.title}
+                onChange={(e) => setForm({ ...form, title: e.target.value })}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="detail">Détail (optionnel)</Label>
+              <Input
+                id="detail"
+                type="text"
+                value={form.detail}
+                onChange={(e) => setForm({ ...form, detail: e.target.value })}
+              />
+            </div>
+
+            <Separator />
+
+            <div className="space-y-2">
+              <Label>Icône</Label>
+              <IconPicker
+                value={form.icon}
+                onChange={(icon) => setForm({ ...form, icon })}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                value={form.description}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                rows={4}
+                required
+              />
+            </div>
+
+          </form>
+      </div>
     </div>
   );
 }

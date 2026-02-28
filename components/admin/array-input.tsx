@@ -1,7 +1,10 @@
 "use client";
 
-import { Plus, X } from "lucide-react";
+import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface ArrayInputProps {
   value: string[];
@@ -38,39 +41,33 @@ export default function ArrayInput({
   return (
     <div className="space-y-3">
       <div className="flex gap-2">
-        <input
+        <Input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="flex-1 px-3 py-2 rounded-lg bg-background border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
         />
-        <button
-          type="button"
-          onClick={handleAdd}
-          className="px-3 py-2 rounded-lg bg-accent text-background hover:bg-accent/90 transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-        </button>
+        <Button type="button" onClick={handleAdd} size="icon">
+          <PlusIcon className="w-4 h-4" />
+        </Button>
       </div>
 
       {value.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {value.map((item, i) => (
-            <span
-              key={i}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border text-sm text-foreground"
-            >
+            <Badge key={i} variant="secondary" className="gap-1.5 pr-1.5">
               {item}
-              <button
+              <Button
                 type="button"
+                variant="ghost"
+                size="icon-xs"
                 onClick={() => handleRemove(i)}
-                className="text-muted-foreground hover:text-destructive transition-colors"
+                className="text-muted-foreground hover:text-destructive"
               >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            </span>
+                <XIcon className="w-3 h-3" />
+              </Button>
+            </Badge>
           ))}
         </div>
       )}

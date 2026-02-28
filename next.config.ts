@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
   },
   productionBrowserSourceMaps: false,
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizePackageImports: ["@phosphor-icons/react", "framer-motion"],
   },
 
   async redirects() {

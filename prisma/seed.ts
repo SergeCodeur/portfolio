@@ -7,6 +7,13 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  // Clean existing data to avoid duplicates on re-seed
+  await prisma.expertiseCategory.deleteMany();
+  await prisma.processStep.deleteMany();
+  await prisma.testimonial.deleteMany();
+  await prisma.service.deleteMany();
+  await prisma.project.deleteMany();
+
   // Create admin user
   const passwordHash = await hash("admin123", 12);
   await prisma.user.upsert({

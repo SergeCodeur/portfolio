@@ -1,10 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useState } from "react";
 import { getIcon } from "@/lib/icons";
 import type { ProcessStepData } from "@/types";
+import { ArrowRightIcon } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 interface ProcessSectionProps {
   steps: ProcessStepData[];
@@ -81,10 +81,8 @@ const ProcessSection = ({ steps }: ProcessSectionProps) => {
                 {steps.map((step, index) => {
                   const angle = index * stepAngle;
                   const finalAngle = angle + rotation;
-                  const xPos =
-                    Math.cos((finalAngle * Math.PI) / 180) * radius;
-                  const yPos =
-                    Math.sin((finalAngle * Math.PI) / 180) * radius;
+                  const xPos = Math.cos((finalAngle * Math.PI) / 180) * radius;
+                  const yPos = Math.sin((finalAngle * Math.PI) / 180) * radius;
                   const StepIcon = getIcon(step.icon);
 
                   return (
@@ -164,7 +162,7 @@ const ProcessSection = ({ steps }: ProcessSectionProps) => {
               >
                 {/* Top Meta Data */}
                 <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-                  <div className="h-[2px] w-8 sm:w-12 bg-accent" />
+                  <div className="h-0.5 w-8 sm:w-12 bg-accent" />
                   <span className="text-accent text-xs sm:text-sm font-bold uppercase tracking-widest">
                     {steps[active].duration}
                   </span>
@@ -197,7 +195,7 @@ const ProcessSection = ({ steps }: ProcessSectionProps) => {
                     className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent flex items-center justify-center hover:scale-110 hover:shadow-[0_0_20px_rgba(253,253,150,0.5)] transition-all duration-300 cursor-pointer group shrink-0"
                     aria-label="Étape suivante"
                   >
-                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-black group-hover:translate-x-1 transition-transform" />
+                    <ArrowRightIcon className="w-5 h-5 sm:w-6 sm:h-6 text-black group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </motion.div>

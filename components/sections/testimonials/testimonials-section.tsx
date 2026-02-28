@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { CaretLeftIcon, CaretRightIcon, QuotesIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import type { TestimonialData } from "@/types";
 
@@ -24,9 +24,9 @@ const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
     >
       {/* Background Decor */}
       <div className="absolute top-10 sm:top-20 right-4 sm:right-10 md:right-20 text-accent opacity-5">
-        <Quote size={200} className="sm:hidden" />
-        <Quote size={300} className="hidden sm:block md:hidden" />
-        <Quote size={400} className="hidden md:block" />
+        <QuotesIcon size={200} className="sm:hidden" />
+        <QuotesIcon size={300} className="hidden sm:block md:hidden" />
+        <QuotesIcon size={400} className="hidden md:block" />
       </div>
 
       <div className="max-w-[1000px] mx-auto relative z-10">
@@ -85,14 +85,14 @@ const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
               aria-label="Témoignage précédent"
               className="p-3 sm:p-4 rounded-full border border-white/10 text-white hover:bg-primary hover:text-background transition-colors"
             >
-              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+              <CaretLeftIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
             <button
               onClick={next}
               aria-label="Témoignage suivant"
               className="p-3 sm:p-4 rounded-full border border-white/10 text-white hover:bg-primary hover:text-background transition-colors"
             >
-              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              <CaretRightIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </motion.div>
         </div>

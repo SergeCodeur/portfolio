@@ -68,7 +68,7 @@ const HeroBanner = () => {
           </h1>
 
           {/* Ligne 2 : WEB CRÉATIF */}
-          <div className="flex w-full justify-center items-center gap-1 min-[375px]:gap-1.5 min-[425px]:gap-2 min-[768px]:gap-1.5 sm:gap-4 md:gap-6 lg:gap-8 laptop:gap-10 laptop-lg:gap-10 mt-0 sm:mt-1 md:mt-0 flex-wrap min-[375px]:flex-nowrap justify-center">
+          <div className="flex w-full justify-center items-center gap-1 min-[375px]:gap-1.5 min-[425px]:gap-2 min-[768px]:gap-1.5 sm:gap-4 md:gap-6 lg:gap-8 laptop:gap-10 laptop-lg:gap-10 mt-0 sm:mt-1 md:mt-0 flex-wrap min-[375px]:flex-nowrap">
             <span className="text-[8.5vw] min-[375px]:text-[9vw] min-[425px]:text-[9.5vw] min-[768px]:text-[4.8vw] sm:text-[8vw] md:text-[5rem] lg:text-[6.5rem] laptop:text-[7rem] xl:text-[7.5rem] laptop-lg:text-[9rem] leading-[0.9] font-extrabold tracking-tighter text-foreground drop-shadow-2xl overflow-hidden pb-4 -mb-4 px-0.5 min-[375px]:px-0.5 min-[425px]:px-1 min-[768px]:px-0.5">
               <motion.span custom={1} variants={textReveal} className="block">
                 Web

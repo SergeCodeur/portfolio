@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircleIcon } from "@phosphor-icons/react";
 import { useRef } from "react";
 import { getIcon } from "@/lib/icons";
 import type { ServiceData } from "@/types";
@@ -49,7 +49,7 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
           <div className="mt-auto pt-5 laptop:pt-6 laptop-lg:pt-6 border-t border-gray-200">
             {/* Livrables */}
             <div className="flex items-center gap-2 mb-3 laptop:mb-4 laptop-lg:mb-4 text-xs sm:text-xs laptop:text-sm laptop-lg:text-sm font-bold text-[#050816]">
-              <CheckCircle2 className="w-4 h-4 laptop:w-4 laptop:h-4 laptop-lg:w-4 laptop-lg:h-4 text-green-500 shrink-0" />
+              <CheckCircleIcon className="w-4 h-4 laptop:w-4 laptop:h-4 laptop-lg:w-4 laptop-lg:h-4 text-green-500 shrink-0" />
               <span>Inclus : {service.deliverables}</span>
             </div>
 
