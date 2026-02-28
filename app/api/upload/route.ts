@@ -1,4 +1,4 @@
-import { uploadFile } from "@/lib/upload";
+import { uploadFile, deleteFile } from "@/lib/upload";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -23,6 +23,27 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json(
       { error: "Erreur lors de l'upload" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const { url } = await request.json();
+
+    if (!url || typeof url !== "string") {
+      return NextResponse.json(
+        { error: "URL manquante" },
+        { status: 400 }
+      );
+    }
+
+    await deleteFile(url);
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json(
+      { error: "Erreur lors de la suppression" },
       { status: 500 }
     );
   }
