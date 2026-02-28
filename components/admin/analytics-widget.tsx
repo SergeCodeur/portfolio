@@ -143,8 +143,8 @@ export default function AnalyticsWidget() {
   );
 
   return (
-    <div className="rounded-xl border border-accent/15 bg-accent/3 overflow-hidden mt-6">
-      <div className="flex items-center justify-between px-5 py-3 border-b border-accent/15">
+    <div className="rounded-xl border border overflow-hidden mt-6">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-border">
         <h2 className="font-semibold text-sm">Analytics</h2>
         <div className="flex items-center gap-2">
           <DropdownMenu>
