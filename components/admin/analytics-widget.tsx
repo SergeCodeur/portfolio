@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import type { DateRange } from "react-day-picker";
@@ -67,35 +68,28 @@ function toISODate(date: Date) {
   return format(date, "yyyy-MM-dd");
 }
 
+async function fetchAnalytics(days: number | null, range?: DateRange): Promise<AnalyticsData> {
+  let url = "/api/analytics";
+  if (range?.from && range?.to) {
+    url += `?from=${toISODate(range.from)}&to=${toISODate(range.to)}`;
+  } else if (days) {
+    url += `?days=${days}`;
+  }
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Fetch failed");
+  return res.json();
+}
+
 export default function AnalyticsWidget() {
-  const [data, setData] = useState<AnalyticsData | null>(null);
-  const [loading, setLoading] = useState(true);
   const [days, setDays] = useState<number | null>(7);
   const [customRange, setCustomRange] = useState<DateRange | undefined>();
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [pendingRange, setPendingRange] = useState<DateRange | undefined>();
 
-  const fetchData = useCallback(
-    (d: number | null, range?: DateRange) => {
-      setLoading(true);
-      let url = "/api/analytics";
-      if (range?.from && range?.to) {
-        url += `?from=${toISODate(range.from)}&to=${toISODate(range.to)}`;
-      } else if (d) {
-        url += `?days=${d}`;
-      }
-      fetch(url)
-        .then((res) => res.json())
-        .then(setData)
-        .catch(() => setData({ configured: false }))
-        .finally(() => setLoading(false));
-    },
-    []
-  );
-
-  useEffect(() => {
-    fetchData(days, customRange);
-  }, [days, customRange, fetchData]);
+  const { data, isLoading: loading } = useQuery({
+    queryKey: ["analytics", days, customRange?.from?.toISOString(), customRange?.to?.toISOString()],
+    queryFn: () => fetchAnalytics(days, customRange),
+  });
 
   function handlePresetSelect(preset: number) {
     setCustomRange(undefined);
@@ -283,36 +277,101 @@ export default function AnalyticsWidget() {
               </div>
             </div>
 
-            {/* Bar chart */}
-            {data?.dailyVisitors && data.dailyVisitors.length > 0 && (
-              <div className="mb-6">
-                <div className="flex items-end gap-1.5 h-24">
-                  {data.dailyVisitors.map((day) => (
-                    <div
-                      key={day.day}
-                      className="flex-1 flex flex-col items-center gap-1"
-                    >
-                      <div
-                        className="w-full bg-accent/80 rounded min-h-1 transition-all"
-                        style={{
-                          height: `${Math.max((day.visitors / maxVisitors) * 100, 6)}%`,
-                        }}
+            {/* Line chart */}
+            {data?.dailyVisitors && data.dailyVisitors.length > 1 && (() => {
+              const days = data.dailyVisitors;
+              const max = Math.max(...days.map((d) => d.visitors), 1);
+              const w = 500;
+              const h = 100;
+              const px = 10;
+              const py = 5;
+              const stepX = (w - px * 2) / Math.max(days.length - 1, 1);
+              const points = days.map((d, i) => ({
+                x: px + i * stepX,
+                y: py + (1 - d.visitors / max) * (h - py * 2),
+              }));
+
+              // Smooth cubic bezier path
+              let linePath = `M${points[0].x},${points[0].y}`;
+              for (let i = 1; i < points.length; i++) {
+                const prev = points[i - 1];
+                const curr = points[i];
+                const cpx = (prev.x + curr.x) / 2;
+                linePath += ` C${cpx},${prev.y} ${cpx},${curr.y} ${curr.x},${curr.y}`;
+              }
+
+              const areaPath = `${linePath} L${points[points.length - 1].x},${h} L${points[0].x},${h} Z`;
+
+              // Pick evenly spaced label indices
+              const maxLabels = days.length <= 14 ? days.length : 7;
+              const showDots = days.length <= 14;
+              const labelIndices: number[] = [];
+              if (days.length <= maxLabels) {
+                days.forEach((_, i) => labelIndices.push(i));
+              } else {
+                for (let i = 0; i < maxLabels; i++) {
+                  labelIndices.push(Math.round((i * (days.length - 1)) / (maxLabels - 1)));
+                }
+              }
+
+              return (
+                <div className="mb-6">
+                  <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-24" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d={areaPath}
+                      fill="url(#areaGrad)"
+                      className="animate-[fadeIn_0.8s_ease-out_0.6s_both]"
+                    />
+                    <path
+                      d={linePath}
+                      fill="none"
+                      stroke="var(--color-accent)"
+                      strokeWidth="2"
+                      vectorEffect="non-scaling-stroke"
+                      strokeDasharray="2000"
+                      strokeDashoffset="2000"
+                      className="animate-[drawLine_1s_ease-out_forwards]"
+                    />
+                    {showDots && points.map((p, i) => (
+                      <circle
+                        key={i}
+                        cx={p.x}
+                        cy={p.y}
+                        r="3"
+                        fill="var(--color-accent)"
+                        vectorEffect="non-scaling-stroke"
+                        className="animate-[fadeIn_0.3s_ease-out_both]"
+                        style={{ animationDelay: `${0.3 + i * 0.08}s` }}
                       />
-                    </div>
-                  ))}
+                    ))}
+                  </svg>
+                  <div className="relative mt-1.5 h-4">
+                    {labelIndices.map((idx, i) => (
+                      <span
+                        key={idx}
+                        className="absolute text-[10px] text-muted-foreground whitespace-nowrap"
+                        style={{
+                          left: `${(points[idx].x / w) * 100}%`,
+                          transform: i === 0
+                            ? "translateX(0)"
+                            : i === labelIndices.length - 1
+                              ? "translateX(-100%)"
+                              : "translateX(-50%)",
+                        }}
+                      >
+                        {days[idx].day}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex gap-1.5 mt-1.5">
-                  {data.dailyVisitors.map((day) => (
-                    <span
-                      key={day.day}
-                      className="flex-1 text-center text-[10px] text-muted-foreground"
-                    >
-                      {day.day}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
+              );
+            })()}
 
             {/* Top pages */}
             {data?.topPages && data.topPages.length > 0 && (

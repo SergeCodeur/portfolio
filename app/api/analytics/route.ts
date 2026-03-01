@@ -38,12 +38,20 @@ export async function GET(request: Request) {
   const to = searchParams.get("to");
 
   let dateFilter: string;
+  let startDate: Date;
+  let endDate: Date;
+
   if (from && to && /^\d{4}-\d{2}-\d{2}$/.test(from) && /^\d{4}-\d{2}-\d{2}$/.test(to)) {
     dateFilter = `AND timestamp >= '${from}' AND timestamp < '${to}' + INTERVAL 1 DAY`;
+    startDate = new Date(from);
+    endDate = new Date(to);
   } else {
     const rawDays = Number(searchParams.get("days") || 7);
     const days = ALLOWED_DAYS.includes(rawDays) ? rawDays : 7;
     dateFilter = `AND timestamp >= now() - INTERVAL ${days} DAY`;
+    endDate = new Date();
+    startDate = new Date();
+    startDate.setDate(startDate.getDate() - days + 1);
   }
 
   const excludeFilter = `AND properties.$current_url NOT LIKE '%/admin%' AND properties.$current_url NOT LIKE '%/login%' AND match(replaceRegexpAll(properties.$current_url, '^https?://[^/]+', ''), '^/(#.*)?$')`;
@@ -86,12 +94,34 @@ export async function GET(request: Request) {
       `),
     ]);
 
-    const dailyVisitors = (visitorsDaily.results as [string, number][]).map(
-      ([day, visitors]) => ({
-        day: day.slice(5, 10),
-        visitors: Number(visitors),
-      })
-    );
+    // Build a map of existing data from PostHog
+    const visitorsMap = new Map<string, number>();
+    for (const [day, visitors] of visitorsDaily.results as [string, number][]) {
+      visitorsMap.set(day.slice(0, 10), Number(visitors));
+    }
+
+    // Fill all days in the range (including days with 0 visitors)
+    // Use local date parts to avoid UTC timezone shift
+    function toLocalISO(d: Date) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${y}-${m}-${day}`;
+    }
+
+    const dailyVisitors: { day: string; visitors: number }[] = [];
+    const cursor = new Date(startDate);
+    cursor.setHours(12, 0, 0, 0);
+    const end = new Date(endDate);
+    end.setHours(12, 0, 0, 0);
+    while (cursor <= end) {
+      const iso = toLocalISO(cursor);
+      dailyVisitors.push({
+        day: iso.slice(5, 10),
+        visitors: visitorsMap.get(iso) ?? 0,
+      });
+      cursor.setDate(cursor.getDate() + 1);
+    }
 
     const totalVisitors = dailyVisitors.reduce(
       (sum, d) => sum + d.visitors,
