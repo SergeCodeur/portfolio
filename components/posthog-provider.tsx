@@ -21,7 +21,7 @@ function PostHogPageView() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (!pathname || pathname.startsWith("/admin") || pathname.startsWith("/login")) return;
+    if (pathname !== "/") return;
 
     const url = window.origin + pathname;
     const search = searchParams.toString();

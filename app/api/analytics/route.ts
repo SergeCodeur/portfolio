@@ -46,7 +46,7 @@ export async function GET(request: Request) {
     dateFilter = `AND timestamp >= now() - INTERVAL ${days} DAY`;
   }
 
-  const excludeFilter = `AND properties.$current_url NOT LIKE '%/admin%' AND properties.$current_url NOT LIKE '%/login%'`;
+  const excludeFilter = `AND properties.$current_url NOT LIKE '%/admin%' AND properties.$current_url NOT LIKE '%/login%' AND match(replaceRegexpAll(properties.$current_url, '^https?://[^/]+', ''), '^/(#.*)?$')`;
 
   try {
     const [visitorsDaily, pageViewsTotal, topPages] = await Promise.all([

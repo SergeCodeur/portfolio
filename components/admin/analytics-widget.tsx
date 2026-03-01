@@ -286,16 +286,16 @@ export default function AnalyticsWidget() {
             {/* Bar chart */}
             {data?.dailyVisitors && data.dailyVisitors.length > 0 && (
               <div className="mb-6">
-                <div className="flex items-end gap-1.5 h-16">
+                <div className="flex items-end gap-1.5 h-24">
                   {data.dailyVisitors.map((day) => (
                     <div
                       key={day.day}
                       className="flex-1 flex flex-col items-center gap-1"
                     >
                       <div
-                        className="w-full bg-accent/80 rounded-sm min-h-0.5 transition-all"
+                        className="w-full bg-accent/80 rounded min-h-1 transition-all"
                         style={{
-                          height: `${Math.max((day.visitors / maxVisitors) * 100, 3)}%`,
+                          height: `${Math.max((day.visitors / maxVisitors) * 100, 6)}%`,
                         }}
                       />
                     </div>
